@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/minio.iml" filepath="$PROJECT_DIR$/.idea/minio.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/manifests.iml" filepath="$PROJECT_DIR$/.idea/manifests.iml" />
     </modules>
   </component>
 </project>
