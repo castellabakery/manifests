@@ -1,4 +1,15 @@
-namespace: mariadb
-imageRegistry: localhost:32500
-moduleVersion:
- mariadb: latest
+mariadb:
+ architecture: standalone
+ exposePort: true
+ fullnameOverride: mariadb
+auth:
+ rootPassword: 'dlwk2452!@'
+primary:
+ name: ''
+ extraEnvVars:
+ - name: TZ
+   value: 'Asia/Seoul'
+ persistence:
+  existingClaim: "mariadb-pvc"
+  hostPath: /data/volumes/mariadb
+  size: 10Gi
