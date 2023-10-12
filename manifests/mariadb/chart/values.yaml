@@ -1,0 +1,4 @@
+namespace: mariadb
+imageRegistry: localhost:32500
+moduleVersion:
+ mariadb: latest
