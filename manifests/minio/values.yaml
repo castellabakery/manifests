@@ -1,0 +1,6 @@
+namespace: minio
+imageRegistry: docker.io
+moduleVersion:
+ minio: latest
+MINIO_ROOT_USER: admin
+MINIO_ROOT_PASSWORD: admin123!@#
