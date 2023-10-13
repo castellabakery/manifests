@@ -1,15 +1,7 @@
-mariadb:
- architecture: standalone
- exposePort: true
- fullnameOverride: mariadb
-auth:
- rootPassword: 'dlwk2452!@'
-primary:
- name: ''
- extraEnvVars:
- - name: TZ
-   value: 'Asia/Seoul'
- persistence:
-  existingClaim: "mariadb-pvc"
-  hostPath: /data/volumes/mariadb
-  size: 10Gi
+namespace: database
+rootPassword: dlwk2452!@
+imageRegistry: bitnami
+moduleVersion:
+  mariadb: latest
+volumePath: "/data/database"
+port: 30001

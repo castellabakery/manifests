@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mariadb-pvc
+  name: mariadb-pv-claim
+  namespace: {{ .Values.namespace }}
 spec:
-  storageClassName: local-path
-  volumeName: mariadb-pv
+  storageClassName: my-storage
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: {{ .Values.mariadb.primary.persistence.size }}
+      storage: 10Gi

@@ -1,0 +1,39 @@
+apiVersion: v1
+items:
+  - apiVersion: apps/v1
+    kind: StatefulSet
+    metadata:
+      name: mysql
+      namespace: {{ .Values.namespace }}
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: mysql
+      serviceName: mysql
+      template:
+        metadata:
+          labels:
+            app: mysql
+        spec:
+          securityContext:
+            runAsUser: 0
+            fsGroup: 0
+          volumes:
+            - name: mariadb-pv-claim
+              persistentVolumeClaim:
+                claimName: mariadb-pv-claim
+          containers:
+            - env:
+                - name: MARIADB_ROOT_PASSWORD
+                  value: {{ .Values.rootPassword }}
+              image: {{ .Values.imageRegistry }}/mariadb:{{ .Values.moduleVersion.mariadb }}
+              volumeMounts:
+                - name: mariadb-pv-claim
+                  mountPath: /bitnami/mariadb
+              name: mysql
+              ports:
+                - containerPort: 3306
+                  name: tpc
+                  protocol: TCP
+kind: List
