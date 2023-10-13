@@ -69,10 +69,10 @@ controller:
   resources:
     requests:
       cpu: "2000m"
-      memory: "6Gi"
+      memory: "12Gi"
     limits:
       cpu: "2000m"
-      memory: "6Gi"
+      memory: "12Gi"
   # Share process namespace to allow sidecar containers to interact with processes in other containers in the same pod
   shareProcessNamespace: false
   # Overrides the init container default values
@@ -651,11 +651,11 @@ agent:
   hostNetworking: false
   resources:
     requests:
-      cpu: "1000m"
-      memory: "1Gi"
+      cpu: "2000m"
+      memory: "12Gi"
     limits:
-      cpu: "1000m"
-      memory: "1Gi"
+      cpu: "2000m"
+      memory: "12Gi"
   livenessProbe: {}
 #    execArgs: "cat /tmp/healthy"
 #    failureThreshold: 3
