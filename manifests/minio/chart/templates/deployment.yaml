@@ -37,5 +37,5 @@ spec:
    volumes:
    - name: minio-vol
      hostPath:
-      path: /data/minio
+      path: {{ .Values.volumePath }}
       type: DirectoryOrCreate

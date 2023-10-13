@@ -1,0 +1,5 @@
+imageRegistry: docker.io
+moduleVersion:
+  registry: latest
+volumePath: /data/registry
+port: 32500
