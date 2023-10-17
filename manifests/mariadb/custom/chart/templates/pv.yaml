@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mariadb-pv
+spec:
+  storageClassName: mariadb-storage
+  capacity:
+    storage: {{ .Values.primary.persistence.size }}
+  accessModes:
+    - ReadWriteOnce
+#  claimRef:
+#    name: mariadb-pvc
+#    namespace: {{ .Values.primary.persistence.hostPath }}
+  hostPath:
+    path: {{ .Values.primary.persistence.hostPath }}
+    type: DirectoryOrCreate

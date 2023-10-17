@@ -848,7 +848,7 @@ persistence:
   ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
   ##   GKE, AWS & OpenStack)
   ##
-  storageClass:
+  storageClass: my-storage
   annotations: {}
   labels: {}
   accessMode: "ReadWriteOnce"

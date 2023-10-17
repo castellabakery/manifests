@@ -18,7 +18,7 @@ global:
   ##   - myRegistryKeySecretName
   ##
   imagePullSecrets: []
-  storageClass: ""
+  storageClass: "mariadb-storage"
 
 ## @section Common parameters
 ##
@@ -117,7 +117,7 @@ auth:
   ## @param auth.rootPassword Password for the `root` user. Ignored if existing secret is provided.
   ## ref: https://github.com/bitnami/containers/tree/main/bitnami/mariadb#setting-the-root-password-on-first-run
   ##
-  rootPassword: ""
+  rootPassword: "dlwk2452!@"
   ## @param auth.database Name for a custom database to create
   ## ref: https://github.com/bitnami/containers/blob/main/bitnami/mariadb/README.md#creating-a-database-on-first-run
   ##
@@ -328,7 +328,7 @@ primary:
   ##
   containerSecurityContext:
     enabled: true
-    runAsUser: 1001
+    runAsUser: 1000
     runAsNonRoot: true
     privileged: false
     allowPrivilegeEscalation: false
@@ -479,6 +479,7 @@ primary:
     ##   matchLabels:
     ##     app: my-app
     ##
+    hostPath: /data/mariadb
     selector: {}
   ## @param primary.extraVolumes Optionally specify extra list of additional volumes to the MariaDB Primary pod(s)
   ##
@@ -497,7 +498,7 @@ primary:
   service:
     ## @param primary.service.type MariaDB Primary Kubernetes service type
     ##
-    type: ClusterIP
+    type: NodePort
     ports:
       ## @param primary.service.ports.mysql MariaDB Primary Kubernetes service port for MariaDB
       ##
@@ -509,7 +510,7 @@ primary:
     ## ref: https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport
     ##
     nodePorts:
-      mysql: ""
+      mysql: "30001"
     ## @param primary.service.clusterIP MariaDB Primary Kubernetes service clusterIP IP
     ##
     clusterIP: ""
