@@ -118,15 +118,15 @@ proxy:
   secretRef: ""
 
 metrics:
-  enabled: false
+  enabled: true
   port: 5001
   # Create a prometheus-operator servicemonitor
   serviceMonitor:
-    enabled: false
+    enabled: true
     labels: {}
   # prometheus-operator PrometheusRule defining alerting rules for a Prometheus instance
   prometheusRule:
-    enabled: false
+    enabled: true
     labels: {}
     rules: {}
 
@@ -145,7 +145,7 @@ configData:
     debug:
       addr: :5001
       prometheus:
-        enabled: false
+        enabled: true
         path: /metrics
   health:
     storagedriver:
