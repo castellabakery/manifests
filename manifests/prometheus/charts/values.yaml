@@ -556,7 +556,7 @@ server:
   ## Prometheus server readiness and liveness probe initial delay and timeout
   ## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
   ##
-  tcpSocketProbeEnabled: false
+  tcpSocketProbeEnabled: true
   probeScheme: HTTP
   readinessProbeInitialDelay: 30
   readinessProbePeriodSeconds: 5
@@ -569,7 +569,7 @@ server:
   livenessProbeFailureThreshold: 3
   livenessProbeSuccessThreshold: 1
   startupProbe:
-    enabled: false
+    enabled: true
     periodSeconds: 5
     failureThreshold: 30
     timeoutSeconds: 10
