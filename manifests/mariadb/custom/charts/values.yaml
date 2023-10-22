@@ -1030,7 +1030,7 @@ volumePermissions:
 metrics:
   ## @param metrics.enabled Start a side-car prometheus exporter
   ##
-  enabled: false
+  enabled: true
   ## @param metrics.image.registry Exporter image registry
   ## @param metrics.image.repository Exporter image repository
   ## @param metrics.image.tag Exporter image tag (immutable tags are recommended)
@@ -1178,7 +1178,7 @@ metrics:
   serviceMonitor:
     ## @param metrics.serviceMonitor.enabled Create ServiceMonitor Resource for scraping metrics using PrometheusOperator
     ##
-    enabled: false
+    enabled: true
     ## @param metrics.serviceMonitor.namespace Namespace which Prometheus is running in
     ##
     namespace: ""
@@ -1219,7 +1219,7 @@ metrics:
   prometheusRule:
     ## @param metrics.prometheusRule.enabled if `true`, creates a Prometheus Operator PrometheusRule (also requires `metrics.enabled` to be `true` and `metrics.prometheusRule.rules`)
     ##
-    enabled: false
+    enabled: true
     ## @param metrics.prometheusRule.namespace Namespace for the PrometheusRule Resource (defaults to the Release Namespace)
     ##
     namespace: ""
@@ -1256,13 +1256,13 @@ metrics:
 networkPolicy:
   ## @param networkPolicy.enabled Enable network policies
   ##
-  enabled: false
+  enabled: true
   ## @param networkPolicy.metrics.enabled Enable network policy for metrics (prometheus)
   ## @param networkPolicy.metrics.namespaceSelector [object] Monitoring namespace selector labels. These labels will be used to identify the prometheus' namespace.
   ## @param networkPolicy.metrics.podSelector [object] Monitoring pod selector labels. These labels will be used to identify the Prometheus pods.
   ##
   metrics:
-    enabled: false
+    enabled: true
     ## e.g:
     ## podSelector:
     ##   label: monitoring
