@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: prometheus-pv
+spec:
+  storageClassName: prometheus-storage
+  capacity:
+    storage: {{ .Values.thanosRuler.thanosRulerSpec.storage.volumeClaimTemplate.spec.resources.requests.storage }}
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: {{ .Values.thanosRuler.thanosRulerSpec.storage.volumeClaimTemplate.spec.hostPath }}
+    type: DirectoryOrCreate

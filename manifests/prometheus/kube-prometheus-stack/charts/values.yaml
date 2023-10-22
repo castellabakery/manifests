@@ -910,7 +910,7 @@ grafana:
   ##
   defaultDashboardsTimezone: utc
 
-  adminPassword: prom-operator
+  adminPassword: dlwk2452!@
 
   rbac:
     ## If true, Grafana PSPs will be created
@@ -920,12 +920,12 @@ grafana:
   ingress:
     ## If true, Grafana Ingress will be created
     ##
-    enabled: false
+    enabled: true
 
     ## IngressClassName for Grafana Ingress.
     ## Should be provided if Ingress is enable.
     ##
-    # ingressClassName: nginx
+    ingressClassName: nginx
 
     ## Annotations for Grafana Ingress
     ##
@@ -942,7 +942,8 @@ grafana:
     ##
     # hosts:
     #   - grafana.domain.com
-    hosts: []
+    hosts:
+      - grafana.pastelcloud.store
 
     ## Path for grafana ingress
     path: /
@@ -2611,7 +2612,7 @@ prometheus:
     ## Port to expose on each node
     ## Only used if service.type is 'NodePort'
     ##
-    nodePort: 30090
+    nodePort: 30116
 
     ## Loadbalancer IP
     ## Only use if service.type is "LoadBalancer"
@@ -2624,7 +2625,7 @@ prometheus:
 
     ## Service type
     ##
-    type: ClusterIP
+    type: NodePort
 
     ## Additional ports to open for Prometheus service
     ##
@@ -3266,17 +3267,18 @@ prometheus:
     ## Prometheus StorageSpec for persistent data
     ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/user-guides/storage.md
     ##
-    storageSpec: {}
+    storageSpec:
     ## Using PersistentVolumeClaim
     ##
-    #  volumeClaimTemplate:
-    #    spec:
-    #      storageClassName: gluster
-    #      accessModes: ["ReadWriteOnce"]
-    #      resources:
-    #        requests:
-    #          storage: 50Gi
-    #    selector: {}
+#      volumeClaimTemplate:
+#        spec:
+#          storageClassName: prometheus-storage
+#          accessModes: ["ReadWriteOnce"]
+#          resources:
+#            requests:
+#              storage: 50Gi
+#          hostPath: /data/prometheus
+#        selector: {}
 
     ## Using tmpfs volume
     ##
@@ -3714,7 +3716,7 @@ thanosRuler:
 
   ## Deploy thanosRuler
   ##
-  enabled: false
+  enabled: true
 
   ## Annotations for ThanosRuler
   ##
@@ -3739,7 +3741,7 @@ thanosRuler:
     maxUnavailable: ""
 
   ingress:
-    enabled: false
+    enabled: true
 
     # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
     # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
@@ -3751,8 +3753,8 @@ thanosRuler:
 
     ## Hosts must be provided if Ingress is enabled.
     ##
-    hosts: []
-      # - thanosruler.domain.com
+    hosts:
+       - thanosruler.pastelcloud.store
 
     ## Paths to use for ingress rules - one path should match the thanosruler.routePrefix
     ##
@@ -3949,15 +3951,16 @@ thanosRuler:
     ## Storage is the definition of how storage will be used by the ThanosRuler instances.
     ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/user-guides/storage.md
     ##
-    storage: {}
-    # volumeClaimTemplate:
-    #   spec:
-    #     storageClassName: gluster
-    #     accessModes: ["ReadWriteOnce"]
-    #     resources:
-    #       requests:
-    #         storage: 50Gi
-    #   selector: {}
+    storage:
+     volumeClaimTemplate:
+       spec:
+         storageClassName: prometheus-storage
+         accessModes: ["ReadWriteOnce"]
+         resources:
+           requests:
+             storage: 50Gi
+         hostPath: /data/prometheus-thanos
+       selector: {}
 
     ## AlertmanagerConfig define configuration for connecting to alertmanager.
     ## Only available with Thanos v0.10.0 and higher. Maps to the alertmanagers.config Thanos Ruler arg.
