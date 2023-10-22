@@ -1,7 +1,7 @@
 # Python development for hack
 venv
 pyvenv.cfg
-!**
+!ci
 charts/*
 !charts/crds/
 !charts/crds/**
