@@ -893,13 +893,23 @@ grafana:
   enabled: true
   namespaceOverride: ""
 
+  persistence:
+    enabled: true
+    type: pvc
+    storageClassName: grafana-storage
+    accessModes:
+      - ReadWriteOnce
+    size: 4Gi
+    finalizers:
+      - kubernetes.io/pvc-protection
+
   ## ForceDeployDatasources Create datasource configmap even if grafana deployment has been disabled
   ##
   forceDeployDatasources: false
 
   ## ForceDeployDashboard Create dashboard configmap even if grafana deployment has been disabled
   ##
-  forceDeployDashboards: false
+  forceDeployDashboards: true
 
   ## Deploy default dashboards
   ##
@@ -1650,7 +1660,7 @@ kubeEtcd:
     ## proxyUrl: URL of a proxy that should be used for scraping.
     ##
     proxyUrl: ""
-    scheme: http
+    scheme: https
     insecureSkipVerify: false
     serverName: ""
     caFile: ""
@@ -1822,7 +1832,7 @@ kubeProxy:
     ## Enable scraping kube-proxy over https.
     ## Requires proper certs (not self-signed) and delegated authentication/authorization checks
     ##
-    https: false
+    https: true
 
     ## MetricRelabelConfigs to apply to samples after scraping, but before ingestion.
     ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#relabelconfig
@@ -3270,14 +3280,13 @@ prometheus:
     storageSpec:
     ## Using PersistentVolumeClaim
     ##
-#      volumeClaimTemplate:
-#        spec:
-#          storageClassName: prometheus-storage
-#          accessModes: ["ReadWriteOnce"]
-#          resources:
-#            requests:
-#              storage: 50Gi
-#          hostPath: /data/prometheus
+      volumeClaimTemplate:
+        spec:
+          storageClassName: prometheus-storage
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 50Gi
 #        selector: {}
 
     ## Using tmpfs volume
@@ -3409,10 +3418,10 @@ prometheus:
     ## https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md
     ##
     securityContext:
-      runAsGroup: 2000
-      runAsNonRoot: true
-      runAsUser: 1000
-      fsGroup: 2000
+      runAsGroup: 0
+      runAsNonRoot: false
+      runAsUser: 0
+      fsGroup: 0
       seccompProfile:
         type: RuntimeDefault
 
@@ -3716,7 +3725,7 @@ thanosRuler:
 
   ## Deploy thanosRuler
   ##
-  enabled: true
+  enabled: false
 
   ## Annotations for ThanosRuler
   ##
@@ -3741,7 +3750,7 @@ thanosRuler:
     maxUnavailable: ""
 
   ingress:
-    enabled: true
+    enabled: false
 
     # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
     # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
@@ -3753,8 +3762,8 @@ thanosRuler:
 
     ## Hosts must be provided if Ingress is enabled.
     ##
-    hosts:
-       - thanosruler.pastelcloud.store
+    hosts: []
+      # - thanosruler.domain.com
 
     ## Paths to use for ingress rules - one path should match the thanosruler.routePrefix
     ##
@@ -3951,16 +3960,15 @@ thanosRuler:
     ## Storage is the definition of how storage will be used by the ThanosRuler instances.
     ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/user-guides/storage.md
     ##
-    storage:
-     volumeClaimTemplate:
-       spec:
-         storageClassName: prometheus-storage
-         accessModes: ["ReadWriteOnce"]
-         resources:
-           requests:
-             storage: 50Gi
-         hostPath: /data/prometheus-thanos
-       selector: {}
+    storage: {}
+    # volumeClaimTemplate:
+    #   spec:
+    #     storageClassName: gluster
+    #     accessModes: ["ReadWriteOnce"]
+    #     resources:
+    #       requests:
+    #         storage: 50Gi
+    #   selector: {}
 
     ## AlertmanagerConfig define configuration for connecting to alertmanager.
     ## Only available with Thanos v0.10.0 and higher. Maps to the alertmanagers.config Thanos Ruler arg.

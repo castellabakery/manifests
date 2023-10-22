@@ -5,9 +5,9 @@ metadata:
 spec:
   storageClassName: prometheus-storage
   capacity:
-    storage: {{ .Values.thanosRuler.thanosRulerSpec.storage.volumeClaimTemplate.spec.resources.requests.storage }}
+    storage: {{ .Values.prometheus.prometheusSpec.storageSpec.volumeClaimTemplate.spec.resources.requests.storage }}
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: {{ .Values.thanosRuler.thanosRulerSpec.storage.volumeClaimTemplate.spec.hostPath }}
+    path: /data/prometheus
     type: DirectoryOrCreate
