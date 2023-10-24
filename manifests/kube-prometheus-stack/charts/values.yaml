@@ -314,6 +314,31 @@ alertmanager:
   ##      https://prometheus.io/webtools/alerting/routing-tree-editor/
   ##
   stringConfig: ""
+#    route:
+#      group_by: [ 'test' ]
+#      group_wait: 30s
+#      group_interval: 5m
+#      repeat_interval: 1m
+#      receiver: 'email'
+#    receivers:
+#      - name: 'web.hook'
+#        webhook_configs:
+#          - url: 'http://127.0.0.1:5001/'
+#      - name: 'email'
+#        email_configs:
+#          - to: '[email '
+#            from: '[email '
+#            smarthost: smtp.gmail.com:587
+#            auth_username: '[email '
+#            auth_identity: '[email '
+#            auth_password: 'google-app-password'
+#            send_resolved: true
+#    inhibit_rules:
+#      - source_match:
+#          severity: 'critical'
+#        target_match:
+#          severity: 'warning'
+#        equal: [ 'alertname', 'dev', 'instance' ]
 
   ## Pass the Alertmanager configuration directives through Helm's templating
   ## engine. If the Alertmanager configuration contains Alertmanager templates,
@@ -323,7 +348,7 @@ alertmanager:
   ##      https://prometheus.io/docs/alerting/configuration/#tmpl_string
   ##      https://prometheus.io/docs/alerting/notifications/
   ##      https://prometheus.io/docs/alerting/notification_examples/
-  tplConfig: false
+  tplConfig: true
 
   ## Alertmanager template files to format alerts
   ## By default, templateFiles are placed in /etc/alertmanager/config/ and if
@@ -487,7 +512,7 @@ alertmanager:
 
     ## Service type
     ##
-    type: ClusterIP
+    type: NodePort
 
   ## Configuration for creating a separate Service for each statefulset Alertmanager replica
   ##
@@ -3313,10 +3338,10 @@ prometheus:
     ## port to 2379 and allow etcd scraping provided it is running on all Kubernetes master nodes
     ##
     additionalScrapeConfigs:
-      - job_name: "simulator-metrics"
-        metrics_path: "/monitor/metrics"
-        static_configs:
-          - targets: ["simulator.simulator.svc.cluster.local:8080"]
+#      - job_name: "simulator-metrics"
+#        metrics_path: "/monitor/metrics"
+#        static_configs:
+#          - targets: ["simulator.simulator.svc.cluster.local:8080"]
       - job_name: "simulator-prometheus"
         metrics_path: "/monitor/prometheus"
         static_configs:
