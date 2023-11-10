@@ -2,11 +2,9 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: kafka-cont
-provisioner: kubernetes.io/no-provisioner
+provisioner: cluster.local/nfs-provisioner-nfs-subdir-external-provisioner
 parameters:
   type: gp2
 reclaimPolicy: Retain
 allowVolumeExpansion: true
-mountOptions:
-  - debug
 volumeBindingMode: Immediate
