@@ -18,7 +18,7 @@ global:
   ##   - myRegistryKeySecretName
   ##
   imagePullSecrets: []
-  storageClass: ""
+  storageClass: "kafka-cont"
 
 ## @section Common parameters
 ##
@@ -771,7 +771,7 @@ controller:
     ## If undefined (the default) or set to null, no storageClassName spec is
     ## set, choosing the default provisioner.
     ##
-    storageClass: ""
+    storageClass: "kafka-cont"
     ## @param controller.persistence.accessModes Persistent Volume Access Modes
     ##
     accessModes:
@@ -1951,7 +1951,7 @@ metrics:
       readOnlyRootFilesystem: true
       capabilities:
         drop: ["ALL"]
-    ## @param metrics.jmx.containerPorts.metrics Prometheus JMX exporter metrics container port
+    ## @param metrics.jmx.containerPorts.metric:s Prometheus JMX exporter metrics container port
     ##
     containerPorts:
       metrics: 5556
