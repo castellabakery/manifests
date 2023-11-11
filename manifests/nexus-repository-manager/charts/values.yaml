@@ -89,18 +89,18 @@ deployment:
   # # Add init containers. e.g. to be used to give specific permissions for nexus-data.
   # # Add your own init container or uncomment and modify the given example.
   initContainers:
-  #   - name: fmp-volume-permission
-  #   image: busybox
-  #   imagePullPolicy: IfNotPresent
-    command: ['chown','-R', '200', '/nexus-data']
-  #   volumeMounts:
-  #     - name: nexus-data
-  #       mountPath: /nexus-data
+#    - name: fmp-volume-permission
+#      image: busybox
+#      imagePullPolicy: IfNotPresent
+#      command: ['chown','-R', '200:200', '/nexus-data']
+#      volumeMounts:
+#        - name: nexus-repository-manager-data
+#          mountPath: /nexus-data
   # Uncomment and modify this to run a command after starting the nexus container.
   postStart:
     command:    # '["/bin/sh", "-c", "ls"]'
   preStart:
-    command:    # '["/bin/rm", "-f", "/path/to/lockfile"]'
+    command: ['chown','-R', '200:200', '/nexus-data']
   terminationGracePeriodSeconds: 120
   additionalContainers:
   additionalVolumes:
@@ -111,15 +111,15 @@ ingress:
   ingressClassName: nginx
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
-    app.kubernetes.io/name: "ingress-nginx"
-    nginx.ingress.kubernetes.io/rewrite-target: "/"
-    cert-manager.io/cluster-issuer: nexus-issuer
+#    app.kubernetes.io/name: "ingress-nginx"
+#    nginx.ingress.kubernetes.io/rewrite-target: "/"
+#    cert-manager.io/cluster-issuer: nexus-issuer
   hostPath: /
   hostRepo: nexus.pastelcloud.store
-  tls:
-    - secretName: nexus-issuer
-      hosts:
-        - nexus.pastelcloud.store
+#  tls:
+#    - secretName: nexus-issuer
+#      hosts:
+#        - nexus.pastelcloud.store
 
 
 service:
