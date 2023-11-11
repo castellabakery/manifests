@@ -8,8 +8,8 @@ image:
 imagePullSecrets: []
 
 nfs:
-  server: pastelcloud.synology.me:51111
-  path: /nfs
+  server: 123.108.162.52:51111
+  path: /volume1/nfs
   mountOptions:
     - vers=3
   volumeName: nfs-subdir-external-provisioner-root
