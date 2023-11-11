@@ -16,10 +16,10 @@ imagePullSecrets:
 nexus:
   docker:
     enabled: false
-    # registries:
-    #   - host: chart.local
-    #     port: 5000
-    #     secretName: registry-secret
+#    registries:
+#      - host: local.registry
+#        port: 5000
+#        secretName: registry-secret
   env:
     # minimum recommended memory settings for a small, person instance from
     # https://help.sonatype.com/repomanager3/product-information/system-requirements
@@ -62,16 +62,16 @@ nexus:
     fsGroup: 200
   podAnnotations: {}
   livenessProbe:
-    initialDelaySeconds: 30
-    periodSeconds: 30
-    failureThreshold: 6
-    timeoutSeconds: 10
+    initialDelaySeconds: 60
+    periodSeconds: 60
+    failureThreshold: 12
+    timeoutSeconds: 30
     path: /
   readinessProbe:
-    initialDelaySeconds: 30
-    periodSeconds: 30
-    failureThreshold: 6
-    timeoutSeconds: 10
+    initialDelaySeconds: 60
+    periodSeconds: 60
+    failureThreshold: 12
+    timeoutSeconds: 30
     path: /
   # hostAliases allows the modification of the hosts file inside a container
   hostAliases: []
@@ -92,7 +92,7 @@ deployment:
   #   - name: fmp-volume-permission
   #   image: busybox
   #   imagePullPolicy: IfNotPresent
-  #   command: ['chown','-R', '200', '/nexus-data']
+    command: ['chown','-R', '200', '/nexus-data']
   #   volumeMounts:
   #     - name: nexus-data
   #       mountPath: /nexus-data
@@ -107,16 +107,19 @@ deployment:
   additionalVolumeMounts:
 
 ingress:
-  enabled: false
+  enabled: true
   ingressClassName: nginx
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    app.kubernetes.io/name: "ingress-nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: "/"
+    cert-manager.io/cluster-issuer: nexus-issuer
   hostPath: /
-  hostRepo: repo.demo
-  # tls:
-  #   - secretName: nexus-local-tls
-  #     hosts:
-  #       - repo.demo
+  hostRepo: nexus.pastelcloud.store
+  tls:
+    - secretName: nexus-issuer
+      hosts:
+        - nexus.pastelcloud.store
 
 
 service:
@@ -153,7 +156,7 @@ persistence:
   # existingClaim:
   # annotations:
   #  "helm.sh/resource-policy": keep
-  # storageClass: "-"
+  storageClass: "nfs-client"
   storageSize: 8Gi
   # If PersistentDisk already exists you can create a PV for it by including the 2 following keypairs.
   # pdName: nexus-data-disk
