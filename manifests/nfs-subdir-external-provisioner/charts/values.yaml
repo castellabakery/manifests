@@ -8,10 +8,10 @@ image:
 imagePullSecrets: []
 
 nfs:
-  server: 192.168.0.9
-  path: /data/nfs-storage
+  server: pastelcloud.synology.me:51111
+  path: /nfs
   mountOptions:
-    - nfsvers=3
+    - vers=3
   volumeName: nfs-subdir-external-provisioner-root
   # Reclaim policy for the main nfs volume
   reclaimPolicy: Retain

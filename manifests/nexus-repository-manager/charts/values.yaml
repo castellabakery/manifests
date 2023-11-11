@@ -108,18 +108,18 @@ deployment:
 
 ingress:
   enabled: true
-  ingressClassName: nginx
+  ingressClassName: "nginx"
   annotations:
-    nginx.ingress.kubernetes.io/proxy-body-size: "0"
-#    app.kubernetes.io/name: "ingress-nginx"
-#    nginx.ingress.kubernetes.io/rewrite-target: "/"
-#    cert-manager.io/cluster-issuer: nexus-issuer
+#    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    app.kubernetes.io/name: "ingress-nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: "/"
+    cert-manager.io/cluster-issuer: nexus-issuer
   hostPath: /
-  hostRepo: nexus.pastelcloud.store
-#  tls:
-#    - secretName: nexus-issuer
-#      hosts:
-#        - nexus.pastelcloud.store
+  hostRepo: "nex.pastelcloud.store"
+  tls:
+    - secretName: nexus-issuer
+      hosts:
+        - nex.pastelcloud.store
 
 
 service:
