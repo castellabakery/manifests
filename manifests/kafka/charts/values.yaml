@@ -254,8 +254,8 @@ sasl:
   ## @param sasl.zookeeper.password Password for zookeeper communications when SASL is enabled.
   ##
   zookeeper:
-    user: ""
-    password: ""
+    user: "admin"
+    password: "dlwk2452!@"
   ## @param sasl.existingSecret Name of the existing secret containing credentials for clientUsers, interBrokerUser, controllerUser and zookeeperUser
   ## Create this secret running the command below where SECRET_NAME is the name of the secret you want to create:
   ##       kubectl create secret generic SECRET_NAME --from-literal=client-passwords=CLIENT_PASSWORD1,CLIENT_PASSWORD2 --from-literal=inter-broker-password=INTER_BROKER_PASSWORD --from-literal=inter-broker-client-secret=INTER_BROKER_CLIENT_SECRET --from-literal=controller-password=CONTROLLER_PASSWORD --from-literal=controller-client-secret=CONTROLLER_CLIENT_SECRET --from-literal=zookeeper-password=ZOOKEEPER_PASSWORD
@@ -355,7 +355,7 @@ tls:
   zookeeper:
     ## @param tls.zookeeper.enabled Enable TLS for Zookeeper client connections.
     ##
-    enabled: false
+    enabled: true
     ## @param tls.zookeeper.verifyHostname Hostname validation.
     ##
     verifyHostname: true
@@ -799,7 +799,7 @@ controller:
   logPersistence:
     ## @param controller.logPersistence.enabled Enable Kafka logs persistence using PVC, note that ZooKeeper persistence is unaffected
     ##
-    enabled: false
+    enabled: true
     ## @param controller.logPersistence.existingClaim A manually managed Persistent Volume and Claim
     ## If defined, PVC must be created manually before volume will be bound
     ## The value is evaluated as a template
@@ -811,7 +811,7 @@ controller:
     ## If undefined (the default) or set to null, no storageClassName spec is
     ## set, choosing the default provisioner.
     ##
-    storageClass: ""
+    storageClass: "kafka-cont"
     ## @param controller.logPersistence.accessModes Persistent Volume Access Modes
     ##
     accessModes:
@@ -2355,7 +2355,7 @@ zookeeperChrootPath: ""
 zookeeper:
   ## @param zookeeper.enabled Switch to enable or disable the ZooKeeper helm chart. Must be false if you use KRaft mode.
   ##
-  enabled: false
+  enabled: true
   ## @param zookeeper.replicaCount Number of ZooKeeper nodes
   ##
   replicaCount: 1
@@ -2365,19 +2365,19 @@ zookeeper:
     client:
       ## @param zookeeper.auth.client.enabled Enable ZooKeeper auth
       ##
-      enabled: false
+      enabled: true
       ## @param zookeeper.auth.client.clientUser User that will use ZooKeeper client (zkCli.sh) to authenticate. Must exist in the serverUsers comma-separated list.
       ##
-      clientUser: ""
+      clientUser: "admin"
       ## @param zookeeper.auth.client.clientPassword Password that will use ZooKeeper client (zkCli.sh) to authenticate. Must exist in the serverPasswords comma-separated list.
       ##
-      clientPassword: ""
+      clientPassword: "dlwk2452!@"
       ## @param zookeeper.auth.client.serverUsers Comma, semicolon or whitespace separated list of user to be created. Specify them as a string, for example: "user1,user2,admin"
       ##
-      serverUsers: ""
+      serverUsers: "admin"
       ## @param zookeeper.auth.client.serverPasswords Comma, semicolon or whitespace separated list of passwords to assign to users when created. Specify them as a string, for example: "pass4user1, pass4user2, pass4admin"
       ##
-      serverPasswords: ""
+      serverPasswords: "dlwk2452!@"
   ## ZooKeeper Persistence parameters
   ## ref: https://kubernetes.io/docs/user-guide/persistent-volumes/
   ## @param zookeeper.persistence.enabled Enable persistence on ZooKeeper using PVC(s)
@@ -2387,7 +2387,7 @@ zookeeper:
   ##
   persistence:
     enabled: true
-    storageClass: ""
+    storageClass: "kafka-cont"
     accessModes:
       - ReadWriteOnce
     size: 8Gi
