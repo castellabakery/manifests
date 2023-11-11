@@ -8,7 +8,7 @@ image:
 imagePullSecrets: []
 
 nfs:
-  server: 123.108.162.52:51111
+  server: 123.108.162.52
   path: /volume1/nfs
   mountOptions:
     - vers=3
