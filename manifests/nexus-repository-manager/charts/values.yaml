@@ -15,11 +15,11 @@ imagePullSecrets:
 
 nexus:
   docker:
-    enabled: false
-#    registries:
-#      - host: local.registry
-#        port: 5000
-#        secretName: registry-secret
+    enabled: true
+    registries:
+      - host: registry.pastelcloud.store
+        port: 5000
+        secretName: registry-secret
   env:
     # minimum recommended memory settings for a small, person instance from
     # https://help.sonatype.com/repomanager3/product-information/system-requirements
