@@ -296,13 +296,13 @@ alertmanager:
     route:
       group_by: ['namespace']
       group_wait: 30s
-      group_interval: 5m
-      repeat_interval: 12h
+      group_interval: 1m
+      repeat_interval: 1h
       receiver: email-alert
       routes:
       - receiver: email-alert
         matchers:
-          - alertname =~ "InfoInhibitor|Watchdog"
+          - alertname =~ "InfoInhibitor"
     receivers:
       - name: email-alert
         email_configs:
@@ -1397,12 +1397,12 @@ kubelet:
 ## Component scraping the kube controller manager
 ##
 kubeControllerManager:
-  enabled: true
+  enabled: false
 
   ## If your kube controller manager is not deployed as a pod, specify IPs it can be found on
   ##
   endpoints: []
-  # - 10.141.4.22
+#    - 192.168.0.9
   # - 10.141.4.23
   # - 10.141.4.24
 
@@ -1458,7 +1458,7 @@ kubeControllerManager:
     insecureSkipVerify: null
 
     # Name of the server to use when validating TLS certificate
-    serverName: null
+    serverName: kubernetes
 
     ## MetricRelabelConfigs to apply to samples after scraping, but before ingestion.
     ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#relabelconfig
@@ -1634,12 +1634,12 @@ kubeDns:
 ## Component scraping etcd
 ##
 kubeEtcd:
-  enabled: true
+  enabled: false
 
   ## If your etcd is not deployed as a pod, specify IPs it can be found on
   ##
   endpoints: []
-  # - 10.141.4.22
+#    - 192.168.0.9
   # - 10.141.4.23
   # - 10.141.4.24
 
@@ -1694,7 +1694,7 @@ kubeEtcd:
     proxyUrl: ""
     scheme: https
     insecureSkipVerify: false
-    serverName: ""
+    serverName: "kubernetes"
     caFile: ""
     certFile: ""
     keyFile: ""
@@ -1726,12 +1726,12 @@ kubeEtcd:
 ## Component scraping kube scheduler
 ##
 kubeScheduler:
-  enabled: true
+  enabled: false
 
   ## If your kube scheduler is not deployed as a pod, specify IPs it can be found on
   ##
   endpoints: []
-  # - 10.141.4.22
+#    - 192.168.0.9
   # - 10.141.4.23
   # - 10.141.4.24
 
@@ -1786,7 +1786,7 @@ kubeScheduler:
     insecureSkipVerify: null
 
     ## Name of the server to use when validating TLS certificate
-    serverName: null
+    serverName: kubernetes
 
     ## MetricRelabelConfigs to apply to samples after scraping, but before ingestion.
     ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#relabelconfig
@@ -1815,12 +1815,12 @@ kubeScheduler:
 ## Component scraping kube proxy
 ##
 kubeProxy:
-  enabled: true
+  enabled: false
 
   ## If your kube proxy is not deployed as a pod, specify IPs it can be found on
   ##
   endpoints: []
-  # - 10.141.4.22
+#    - 192.168.0.9
   # - 10.141.4.23
   # - 10.141.4.24
 
@@ -1864,7 +1864,7 @@ kubeProxy:
     ## Enable scraping kube-proxy over https.
     ## Requires proper certs (not self-signed) and delegated authentication/authorization checks
     ##
-    https: true
+    https: false
 
     ## MetricRelabelConfigs to apply to samples after scraping, but before ingestion.
     ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#relabelconfig
