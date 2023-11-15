@@ -160,9 +160,10 @@ volumeClaimDeletePolicy: ""
 # ref: https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-node-configuration.html
 #
 nodeSets:
-- name: default
+- name: master
   count: 1
   config:
+    node.roles: ["master"]
     # Comment out when setting the vm.max_map_count via initContainer, as these are mutually exclusive.
     # For production workloads, it is strongly recommended to increase the kernel setting vm.max_map_count to 262144
     # and leave node.store.allow_mmap unset.
@@ -314,3 +315,15 @@ nodeSets:
     # List of volumes that can be mounted by containers belonging to the pod.
     # https://kubernetes.io/docs/concepts/storage/volumes
     # volumes: []
+  volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 5Gi
+        # Adjust to your storage class name
+        #
+          storageClassName: nfs-client
