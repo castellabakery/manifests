@@ -91,10 +91,10 @@ esJavaOpts: "" # example: "-Xmx1g -Xms1g"
 
 resources:
   requests:
-    cpu: "25m"
+    cpu: "100m"
     memory: "2Gi"
   limits:
-    cpu: "25m"
+    cpu: "100m"
     memory: "2Gi"
 
 initResources: {}
@@ -236,13 +236,13 @@ sysctlVmMaxMapCount: 262144
 
 readinessProbe:
   failureThreshold: 3
-  initialDelaySeconds: 120
+  initialDelaySeconds: 600
   periodSeconds: 10
   successThreshold: 3
   timeoutSeconds: 5
 
 # https://www.elastic.co/guide/en/elasticsearch/reference/current/cluster-health.html#request-params wait_for_status
-clusterHealthCheckParams: "wait_for_status=green&timeout=1s"
+clusterHealthCheckParams: "wait_for_status=yellow&timeout=600s"
 
 ## Use an alternate scheduler.
 ## ref: https://kubernetes.io/docs/tasks/administer-cluster/configure-multiple-schedulers/
