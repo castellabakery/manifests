@@ -441,7 +441,7 @@ controller:
   updateStrategy: {}
 
   ingress:
-    enabled: false
+    enabled: true
     # Override for the default paths that map requests to the backend
     paths: []
     # - backend:
@@ -456,7 +456,10 @@ controller:
     # For Kubernetes v1.19+, use 'networking.k8s.io/v1'
     apiVersion: "extensions/v1beta1"
     labels: {}
-    annotations: {}
+    annotations:
+      app.kubernetes.io/name: "ingress-nginx"
+      nginx.ingress.kubernetes.io/rewrite-target: "/"
+      cert-manager.io/cluster-issuer: letsencrypt-prod
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
     # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
@@ -465,11 +468,11 @@ controller:
     # Set this path to jenkinsUriPrefix above or use annotations to rewrite path
     # path: "/jenkins"
     # configures the hostname e.g. jenkins.example.com
-    hostName:
+    hostName: jenkins.pastelcloud.store
     tls:
-    # - secretName: jenkins.cluster.local
-    #   hosts:
-    #     - jenkins.cluster.local
+      - secretName: letsencrypt-prod
+        hosts:
+          - jenkins.pastelcloud.store
 
   # often you want to have your controller all locked down and private
   # but you still want to get webhooks from your SCM
