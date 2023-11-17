@@ -16,7 +16,7 @@ spec:
           value: dlwk2452!@
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: monitor
+    namespace: mariadb
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
