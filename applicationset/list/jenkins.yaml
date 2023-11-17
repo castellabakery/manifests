@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: jenkins
+spec:
+  project: common
+  source:
+    repoURL: 'https://github.com/castellabakery/manifests.git'
+    path: manifests/jenkins/chart
+    targetRevision: main
+    helm:
+      valueFiles:
+        - override.values.yaml
+  destination:
+    server: 'https://kubernetes.default.svc'

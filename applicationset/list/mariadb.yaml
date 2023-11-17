@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mariadb
+spec:
+  project: database
+  source:
+    repoURL: 'https://github.com/castellabakery/manifests.git'
+    path: manifests/mariadb/custom/chart
+    targetRevision: main
+    helm:
+      parameters:
+        - name: primary.service.ports.mysql
+          value: '13306'
+        - name: auth.rootPassword
+          value: dlwk2452!@
+  destination:
+    server: 'https://kubernetes.default.svc'
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

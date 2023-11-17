@@ -11,13 +11,13 @@ spec:
             url: 'https://kubernetes.default.svc'
   template:
     metadata:
-      name: 'pc-settings'
+      name: '{{cluster}}-settings'
     spec:
-      project: pc-settings
+      project: default
       source:
         repoURL: https://github.com/castellabakery/manifests.git
         targetRevision: main
         path: applicationset/list/{{cluster}}
       destination:
         server: '{{url}}'
-        namespace: default
+        namespace: argocd
