@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: jdk17test
+spec:
+  project: service-app
+  source:
+    repoURL: 'https://github.com/castellabakery/jdk17test.git'
+    path: manifests/chart
+    targetRevision: master
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: jdk17test
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
