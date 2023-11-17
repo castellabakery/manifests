@@ -6,7 +6,7 @@ spec:
   project: database
   source:
     repoURL: 'https://github.com/castellabakery/manifests.git'
-    path: manifests/mariadb/custom/chart
+    path: manifests/mariadb/custom/charts
     targetRevision: main
     helm:
       parameters:

@@ -1,18 +1,22 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: kube-prometheus-stack
+  name: jenkins
 spec:
-  project: monitor
+  project: common
   source:
     repoURL: 'https://github.com/castellabakery/manifests.git'
-    path: manifests/prometheus/kube-prometheus-stack/charts
+    path: manifests/jenkins/charts
     targetRevision: main
+    helm:
+      valueFiles:
+        - override.values.yaml
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: monitor
+    namespace: jenkins
   syncPolicy:
-    automated: {}
+    automated:
+      prune: true
+      selfHeal: true
     syncOptions:
-      - ServerSideApply=true
       - CreateNamespace=true

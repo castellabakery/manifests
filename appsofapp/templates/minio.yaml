@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: minio
+spec:
+  project: common
+  source:
+    repoURL: 'https://github.com/castellabakery/minio.git'
+    path: manifests/minio/custom/charts
+    targetRevision: main
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: minio
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

@@ -1,16 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: letsencrypt
+  name: kube-prometheus-stack
 spec:
-  project: common
+  project: monitor
   source:
     repoURL: 'https://github.com/castellabakery/manifests.git'
-    path: manifests/letsencrypt/chart
+    path: manifests/kube-prometheus-stack/charts
     targetRevision: main
   destination:
     server: 'https://kubernetes.default.svc'
+    namespace: monitor
   syncPolicy:
     automated: {}
     syncOptions:
+      - ServerSideApply=true
       - CreateNamespace=true
