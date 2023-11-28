@@ -18,7 +18,7 @@ global:
   ##   - myRegistryKeySecretName
   ##
   imagePullSecrets: []
-  storageClass: "kafka-cont"
+  storageClass: "nfs-client-local"
 
 ## @section Common parameters
 ##
@@ -771,7 +771,7 @@ controller:
     ## If undefined (the default) or set to null, no storageClassName spec is
     ## set, choosing the default provisioner.
     ##
-    storageClass: "kafka-cont"
+    storageClass: "nfs-client-local"
     ## @param controller.persistence.accessModes Persistent Volume Access Modes
     ##
     accessModes:
