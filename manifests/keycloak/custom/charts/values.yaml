@@ -364,14 +364,14 @@ pgchecker:
 
 postgresql:
   # If `true`, the Postgresql dependency is enabled
-  enabled: false
+  enabled: true
   # PostgreSQL User to create
   postgresqlUsername: keycloak
   # PostgreSQL Password for the new user
   postgresqlPassword: keycloak
   # PostgreSQL Database to create
   postgresqlDatabase: keycloak
-  # PostgreSQL network policy configuration
+  #  PostgreSQL network policy configuration
   networkPolicy:
     enabled: false
 

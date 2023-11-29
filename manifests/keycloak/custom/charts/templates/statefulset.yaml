@@ -94,10 +94,11 @@ spec:
             - name: DB_USER
               value: {{ .Values.postgresql.postgresqlUsername | quote }}
             - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ include "keycloak.postgresql.fullname" . }}
-                  key: postgresql-password
+              value: {{ .Values.postgresql.postgresqlPassword | quote }}
+#              valueFrom:
+#                secretKeyRef:
+#                  name: {{ include "keycloak.postgresql.fullname" . }}
+#                  key: postgresql-password
             {{- end }}
             {{- with .Values.extraEnv }}
             {{- tpl . $ | nindent 12 }}

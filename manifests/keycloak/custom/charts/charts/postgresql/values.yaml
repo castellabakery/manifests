@@ -4,10 +4,13 @@
 ##
 global:
   postgresql:
+#    postgresqlPassword: keycloak
+#    postgresqlDatabase: keycloak
+#    postgresqlUsername: keycloak
 #   imageRegistry: myRegistryName
 #   imagePullSecrets:
 #     - myRegistryKeySecretName
-   storageClass: "nfs-client-local"
+    storageClass: "nfs-client-local"
 
 ## Bitnami PostgreSQL image version
 ## ref: https://hub.docker.com/r/bitnami/postgresql/tags/
@@ -143,7 +146,7 @@ postgresqlUsername: keycloak
 postgresqlPassword: keycloak
 
 ## PostgreSQL password using existing secret
-## existingSecret: secret
+#existingSecret: secret
 ##
 
 ## Mount PostgreSQL secret as a file instead of passing environment variable
@@ -190,6 +193,7 @@ extraEnv: []
 ##
 # postgresqlConfiguration:
 
+
 ## PostgreSQL extended configuration
 ## As above, but _appended_ to the main configuration
 ## Alternatively, you can put your *.conf under the files/conf.d/ directory
@@ -210,10 +214,13 @@ primaryAsStandBy:
 ## Specify content for pg_hba.conf
 ## Default: do not create pg_hba.conf
 ## Alternatively, you can put your pg_hba.conf under the files/ directory
-# pgHbaConfiguration: |-
-#   local all all trust
-#   host all all localhost trust
-#   host mydatabase mysuser 192.168.0.0/24 md5
+pgHbaConfiguration: |-
+  local all all trust
+  host all all localhost trust
+  host all all 192.168.0.0/24 md5
+  host all all ::1/128 md5
+  host all all 0.0.0.0/0 md5
+  host all all 0.0.0.0/0 trust
 
 ## ConfigMap with PostgreSQL configuration
 ## NOTE: This will override postgresqlConfiguration and pgHbaConfiguration
@@ -240,8 +247,8 @@ primaryAsStandBy:
 # initdbScriptsSecret:
 
 ## Specify the PostgreSQL username and password to execute the initdb scripts
-# initdbUser:
-# initdbPassword:
+initdbUser: keycloak
+initdbPassword: keycloak
 
 ## Audit settings
 ## https://github.com/bitnami/bitnami-docker-postgresql#auditing
@@ -678,7 +685,7 @@ livenessProbe:
 
 readinessProbe:
   enabled: true
-  initialDelaySeconds: 5
+  initialDelaySeconds: 10
   periodSeconds: 10
   timeoutSeconds: 5
   failureThreshold: 6
