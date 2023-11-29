@@ -3,11 +3,11 @@
 ## Current available global Docker image parameters: imageRegistry and imagePullSecrets
 ##
 global:
-  postgresql: {}
+  postgresql:
 #   imageRegistry: myRegistryName
 #   imagePullSecrets:
 #     - myRegistryKeySecretName
-#   storageClass: myStorageClass
+   storageClass: "nfs-client-local"
 
 ## Bitnami PostgreSQL image version
 ## ref: https://hub.docker.com/r/bitnami/postgresql/tags/
@@ -130,17 +130,17 @@ replication:
 
 ## PostgreSQL admin password (used when `postgresqlUsername` is not `postgres`)
 ## ref: https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md#creating-a-database-user-on-first-run (see note!)
-# postgresqlPostgresPassword:
+postgresqlPostgresPassword: keycloak
 
 ## PostgreSQL user (has superuser privileges if username is `postgres`)
 ## ref: https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md#setting-the-root-password-on-first-run
 ##
-postgresqlUsername: postgres
+postgresqlUsername: keycloak
 
 ## PostgreSQL password
 ## ref: https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md#setting-the-root-password-on-first-run
 ##
-# postgresqlPassword:
+postgresqlPassword: keycloak
 
 ## PostgreSQL password using existing secret
 ## existingSecret: secret
@@ -152,7 +152,7 @@ postgresqlUsername: postgres
 ## Create a database
 ## ref: https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md#creating-a-database-on-first-run
 ##
-# postgresqlDatabase:
+postgresqlDatabase: keycloak
 
 ## PostgreSQL data dir
 ## ref: https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md
@@ -401,7 +401,7 @@ persistence:
   ##
   subPath: ''
 
-  # storageClass: "-"
+  storageClass: "nfs-client-local"
   accessModes:
     - ReadWriteOnce
   size: 8Gi

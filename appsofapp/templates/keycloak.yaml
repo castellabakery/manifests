@@ -6,7 +6,7 @@ spec:
   project: common
   source:
     repoURL: 'https://github.com/castellabakery/manifests.git'
-    path: manifests/keycloak/simple/charts
+    path: manifests/keycloak/custom/charts
     targetRevision: main
   destination:
     server: 'https://kubernetes.default.svc'
