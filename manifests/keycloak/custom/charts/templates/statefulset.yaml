@@ -95,6 +95,10 @@ spec:
               value: {{ .Values.postgresql.postgresqlUsername | quote }}
             - name: DB_PASSWORD
               value: {{ .Values.postgresql.postgresqlPassword | quote }}
+            - name: KEYCLOAK_USER
+              value: "admin"
+            - name: KEYCLOAK_PASSWORD
+              value: "dlwk2452!@"
 #              valueFrom:
 #                secretKeyRef:
 #                  name: {{ include "keycloak.postgresql.fullname" . }}
