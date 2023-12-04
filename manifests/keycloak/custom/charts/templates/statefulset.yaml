@@ -99,6 +99,12 @@ spec:
               value: "admin"
             - name: KEYCLOAK_PASSWORD
               value: "dlwk2452!@"
+            - name: KEYCLOAK_ADMIN
+              value: "admin"
+            - name: KEYCLOAK_ADMIN_PASSWORD
+              value: "dlwk2452!@"
+#            - name: KC_PROXY
+#              value: "edge"
 #              valueFrom:
 #                secretKeyRef:
 #                  name: {{ include "keycloak.postgresql.fullname" . }}
