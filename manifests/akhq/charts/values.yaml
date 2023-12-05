@@ -51,12 +51,19 @@ configuration:
 #                secret: devtokenkey
   akhq:
     security:
+      default-group: no-roles
       enabled: true
       basic-auth:
         - username: admin
           password: 2b33f527d02f6c6ca3ba057a7f808fc69d6b5c6e4933e077cece4e17f6cdd827
           groups:
             - admin
+      token:
+        jwt:
+          signatures:
+            secret:
+              generator:
+                secret: mytokenkey
     server:
       access-log:
         enabled: true
