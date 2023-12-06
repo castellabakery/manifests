@@ -1,0 +1,40 @@
+{{- if .Values.ingress.enabled -}}
+{{- $paths := .Values.ingress.paths -}}
+{{- $pathType := .Values.ingress.pathType -}}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kafka
+  namespace: {{ include "common.names.namespace" . | quote }}
+{{- if .Values.ingress.annotations }}
+  annotations:
+    {{- range $key, $value := .Values.ingress.annotations }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+{{- end }}
+spec:
+{{- with .Values.ingress.ingressClassName }}
+  ingressClassName: {{ . }}
+{{- end }}
+  {{- with .Values.ingress.tls }}
+  tls:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  rules:
+  {{- if .Values.ingress.hosts }}
+    {{- range $host := .Values.ingress.hosts }}
+    - host: {{ $host | quote }}
+      http:
+        paths:
+    {{- range $p := $paths }}
+          - path: {{ $p }}
+            pathType: {{ $pathType }}
+            backend:
+              service:
+                name: kafka
+                port:
+                  number: 9095
+    {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}
