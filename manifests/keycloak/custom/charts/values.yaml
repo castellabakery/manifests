@@ -273,7 +273,7 @@ ingress:
   annotations:
     app.kubernetes.io/name: "ingress-nginx"
     nginx.ingress.kubernetes.io/rewrite-target: "/"
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+#    cert-manager.io/cluster-issuer: "letsencrypt-prod"
     ## Resolve HTTP 502 error using ingress-nginx:
     ## See https://www.ibm.com/support/pages/502-error-ingress-keycloak-response
 #    nginx.ingress.kubernetes.io/proxy-buffer-size: 128k
@@ -287,10 +287,10 @@ ingress:
         - path: /
           pathType: Prefix
   # TLS configuration
-  tls:
-    - hosts:
-        - kc.pastelcloud.store
-      secretName: "letsencrypt-prod"
+#  tls:
+#    - hosts:
+#        - kc.pastelcloud.store
+#      secretName: "letsencrypt-prod"
 
   # ingress for console only (/auth/admin)
   console:
