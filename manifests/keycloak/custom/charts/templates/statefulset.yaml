@@ -95,14 +95,14 @@ spec:
               value: {{ .Values.postgresql.postgresqlUsername | quote }}
             - name: DB_PASSWORD
               value: {{ .Values.postgresql.postgresqlPassword | quote }}
-            - name: KEYCLOAK_USER
-              value: "admin"
-            - name: KEYCLOAK_PASSWORD
-              value: "dlwk2452!@"
-            - name: KEYCLOAK_ADMIN
-              value: "admin"
-            - name: KEYCLOAK_ADMIN_PASSWORD
-              value: "dlwk2452!@"
+#            - name: KEYCLOAK_USER
+#              value: "admin"
+#            - name: KEYCLOAK_PASSWORD
+#              value: "dlwk2452!@"
+#            - name: KEYCLOAK_ADMIN
+#              value: "admin"
+#            - name: KEYCLOAK_ADMIN_PASSWORD
+#              value: "dlwk2452!@"
 #            - name: KC_PROXY
 #              value: "edge"
 #              valueFrom:
@@ -110,6 +110,38 @@ spec:
 #                  name: {{ include "keycloak.postgresql.fullname" . }}
 #                  key: postgresql-password
             {{- end }}
+            - name: KEYCLOAK_ADMIN
+              value: "admin"
+            - name: KEYCLOAK_ADMIN_PASSWORD
+              value: "dlwk2452!@"
+            - name: jgroups.dns.query
+              value: "keycloak"
+            - name: KC_HEALTH_ENABLED
+              value: "true"
+            - name: KC_METRICS_ENABLED
+              value: "true"
+            - name: KC_HTTP_ENABLED
+              value: "true"
+            - name: KC_HTTP_RELATIVE_PATH
+              value: "/auth"
+            - name: KC_HOSTNAME_URL
+              value: "https://kc.pastelcloud.store/keycloak/auth/"
+            - name: KC_HOSTNAME_ADMIN_URL
+              value: "https://kc.pastelcloud.store/keycloak/auth/"
+{{/*            - name: KC_DB*/}}
+{{/*              value: "postgres"*/}}
+{{/*            - name: KC_DB_URL*/}}
+{{/*              value: "jdbc:postgresql://keycloak-postgresql.keycloak:5432/keycloak"*/}}
+{{/*            - name: KC_DB_URL_HOST*/}}
+{{/*              value: {{ include "keycloak.postgresql.fullname" . }}*/}}
+{{/*            - name: KC_DB_URL_PORT*/}}
+{{/*              value: {{ .Values.postgresql.service.port | quote }}*/}}
+{{/*            - name: KC_DB_URL_DATABASE*/}}
+{{/*              value: {{ .Values.postgresql.postgresqlDatabase | quote }}*/}}
+{{/*            - name: KC_DB_USERNAME*/}}
+{{/*              value: {{ .Values.postgresql.postgresqlUsername | quote }}*/}}
+{{/*            - name: KC_DB_PASSWORD*/}}
+{{/*              value: {{ .Values.postgresql.postgresqlPassword | quote }}*/}}
             {{- with .Values.extraEnv }}
             {{- tpl . $ | nindent 12 }}
             {{- end }}

@@ -11,7 +11,7 @@ image:
   # The Keycloak image repository
   repository: quay.io/keycloak/keycloak
   # Overrides the Keycloak image tag whose default is the chart version
-  tag: "14.0.0"
+  tag: "latest"
   # The Keycloak image pull policy
   pullPolicy: IfNotPresent
 
@@ -93,8 +93,8 @@ clusterDomain: cluster.local
 command: []
 
 ## Overrides the default args for the Keycloak container
-args: []
-#args: ["start", "--optimized", "--hostname=keycloak", "--http-enabled=true"]
+args: ["start", "--http-enabled=true", "--optimized", "-Djboss.bind.address.management=0.0.0.0"]
+#args: ["start", "--optimized", "--hostname=keycloak", "--http-enabled=true", "--hostname=kc.pastelcloud.store"]
 
 # Additional environment variables for Keycloak
 extraEnv: ""
@@ -164,7 +164,7 @@ readinessProbe: |
   httpGet:
     path: /auth/realms/master
     port: http
-  initialDelaySeconds: 30
+  initialDelaySeconds: 1200
   timeoutSeconds: 1
 
 # Startup probe configuration
@@ -172,7 +172,7 @@ startupProbe: |
   httpGet:
     path: /auth/
     port: http
-  initialDelaySeconds: 30
+  initialDelaySeconds: 1200
   timeoutSeconds: 1
   failureThreshold: 60
   periodSeconds: 5
@@ -273,7 +273,7 @@ ingress:
   annotations:
     app.kubernetes.io/name: "ingress-nginx"
     nginx.ingress.kubernetes.io/rewrite-target: "/"
-#    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
     ## Resolve HTTP 502 error using ingress-nginx:
     ## See https://www.ibm.com/support/pages/502-error-ingress-keycloak-response
 #    nginx.ingress.kubernetes.io/proxy-buffer-size: 128k
@@ -287,10 +287,10 @@ ingress:
         - path: /
           pathType: Prefix
   # TLS configuration
-#  tls:
-#    - hosts:
-#        - kc.pastelcloud.store
-#      secretName: "letsencrypt-prod"
+  tls:
+    - hosts:
+        - kc.pastelcloud.store
+      secretName: "letsencrypt-prod"
 
   # ingress for console only (/auth/admin)
   console:
