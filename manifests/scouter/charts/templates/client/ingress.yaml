@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: scouter-client
+  annotations:
+    app.kubernetes.io/name: "ingress-nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: "/"
+    cert-manager.io/cluster-issuer: {{ .Values.secretName }}
+spec:
+  ingressClassName: "nginx"
+  tls:
+    - hosts:
+        - "{{ .Values.client.subDomain }}.{{ .Values.domain }}"
+      secretName: {{ .Values.secretName }}
+  rules:
+    - host: "{{ .Values.client.subDomain }}.{{ .Values.domain }}"
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: scouter-client-svc
+                port:
+                  number: 8080

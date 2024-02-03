@@ -1,0 +1,11 @@
+collector:
+  subDomain: "sctcol"
+  secretName: scouter-col-secret
+  ag:
+    subDomain: "sctcolag"
+client:
+  subDomain: "sctcli"
+
+domain: "pastelcloud.store"
+
+secretName: letsencrypt-prod

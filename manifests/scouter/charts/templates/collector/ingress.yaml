@@ -1,0 +1,47 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: scouter-collector-tcp
+  annotations:
+    app.kubernetes.io/name: "ingress-nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: "/"
+    cert-manager.io/cluster-issuer: {{ .Values.collector.secretName }}
+spec:
+  ingressClassName: "nginx"
+  tls:
+    - hosts:
+        - "{{ .Values.collector.subDomain }}.{{ .Values.domain }}"
+      secretName: {{ .Values.collector.secretName }}
+  rules:
+    - host: "{{ .Values.collector.subDomain }}.{{ .Values.domain }}"
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: scouter-collector-svc
+                port:
+                  number: 6180
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: scouter-collector-udp
+  annotations:
+    app.kubernetes.io/name: "ingress-nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: "/"
+    ingress.citrix.com/insecure-service-type: "udp"
+spec:
+  ingressClassName: "nginx"
+  rules:
+    - host: "{{ .Values.collector.ag.subDomain }}.{{ .Values.domain }}"
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: scouter-collector-svc
+                port:
+                  number: 6100

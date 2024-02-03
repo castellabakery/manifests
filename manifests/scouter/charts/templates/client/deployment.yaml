@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scouter-client
+  labels:
+    app: scouter-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: scouter-client
+  template:
+    metadata:
+      labels:
+        app: scouter-client
+    spec:
+      containers:
+        - name: scouter-client
+          image: docker.io/scouterapm/scouter-paper:2.6.5-snapshot
+          imagePullPolicy: Always
+          ports:
+            - name: client
+              containerPort: 80
