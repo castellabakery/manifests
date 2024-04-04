@@ -3356,10 +3356,10 @@ prometheus:
         metrics_path: "/monitor/prometheus"
         static_configs:
           - targets: [ "simulator.simulator.svc.cluster.local:8080" ]
-      - job_name: "consumebatch-prometheus"
-        metrics_path: "/monitor/prometheus"
-        static_configs:
-          - targets: [ "consumebatch.consumebatch.svc.cluster.local:8080" ]
+#      - job_name: "consumebatch-prometheus"
+#        metrics_path: "/monitor/prometheus"
+#        static_configs:
+#          - targets: [ "consumebatch.consumebatch.svc.cluster.local:8080" ]
     # - job_name: kube-etcd
     #   kubernetes_sd_configs:
     #     - role: node
