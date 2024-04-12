@@ -1912,7 +1912,7 @@ server:
     ## Hostnames must be provided if Ingress is enabled.
     ## Secrets must be manually created in the namespace
     hosts:
-       - argocd.pastelcloud.store
+       - argocd.pastelcloud.shop
 
     # -- List of ingress paths
     paths:
@@ -1933,7 +1933,7 @@ server:
     tls:
        - secretName: letsencrypt-prod
          hosts:
-           - argocd.pastelcloud.store
+           - argocd.pastelcloud.shop
 
     # -- Uses `server.service.servicePortHttps` instead `server.service.servicePortHttp`
     https: true

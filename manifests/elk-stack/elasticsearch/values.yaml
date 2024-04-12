@@ -269,13 +269,13 @@ ingress:
   className: "nginx"
   pathtype: ImplementationSpecific
   hosts:
-    - host: es.pastelcloud.store
+    - host: es.pastelcloud.shop
       paths:
         - path: /
   tls:
     - secretName: nexus-issuer
       hosts:
-        - es.pastelcloud.store
+        - es.pastelcloud.shop
 
 nameOverride: ""
 fullnameOverride: ""

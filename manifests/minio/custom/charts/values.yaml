@@ -209,11 +209,11 @@ ingress:
     # nginx.ingress.kubernetes.io/whitelist-source-range: 0.0.0.0/0
   path: /
   hosts:
-    - resources.pastelcloud.store
+    - resources.pastelcloud.shop
   tls:
     - secretName: nexus-issuer
       hosts:
-        - resources.pastelcloud.store
+        - resources.pastelcloud.shop
 
 consoleService:
   type: ClusterIP
@@ -242,11 +242,11 @@ consoleIngress:
     # nginx.ingress.kubernetes.io/whitelist-source-range: 0.0.0.0/0
   path: /
   hosts:
-    - minio.pastelcloud.store
+    - minio.pastelcloud.shop
   tls:
     - secretName: letsencrypt-prod
       hosts:
-        - minio.pastelcloud.store
+        - minio.pastelcloud.shop
 
 ## Node labels for pod assignment
 ## Ref: https://kubernetes.io/docs/user-guide/node-selection/

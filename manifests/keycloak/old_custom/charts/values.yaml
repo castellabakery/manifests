@@ -94,7 +94,7 @@ command: []
 
 ## Overrides the default args for the Keycloak container
 args: ["start", "--http-enabled=true", "--optimized", "-Djboss.bind.address.management=0.0.0.0"]
-#args: ["start", "--optimized", "--hostname=keycloak", "--http-enabled=true", "--hostname=kc.pastelcloud.store"]
+#args: ["start", "--optimized", "--hostname=keycloak", "--http-enabled=true", "--hostname=kc.pastelcloud.shop"]
 
 # Additional environment variables for Keycloak
 extraEnv: ""
@@ -282,14 +282,14 @@ ingress:
   labels: {}
    # List of rules for the Ingress
   rules:
-    - host: 'kc.pastelcloud.store'
+    - host: 'kc.pastelcloud.shop'
       paths:
         - path: /
           pathType: Prefix
   # TLS configuration
   tls:
     - hosts:
-        - kc.pastelcloud.store
+        - kc.pastelcloud.shop
       secretName: "letsencrypt-prod"
 
   # ingress for console only (/auth/admin)

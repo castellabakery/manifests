@@ -988,7 +988,7 @@ grafana:
     # hosts:
     #   - grafana.domain.com
     hosts:
-      - grafana.pastelcloud.store
+      - grafana.pastelcloud.shop
 
     ## Path for grafana ingress
     path: /
@@ -999,7 +999,7 @@ grafana:
     tls:
       - secretName: letsencrypt-prod
         hosts:
-          - grafana.pastelcloud.store
+          - grafana.pastelcloud.shop
 
   sidecar:
     dashboards:

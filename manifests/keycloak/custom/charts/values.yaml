@@ -579,7 +579,7 @@ ingress:
   apiVersion: ""
   ## @param ingress.hostname Default host for the ingress record (evaluated as template)
   ##
-  hostname: kc.pastelcloud.store
+  hostname: kc.pastelcloud.shop
   ## @param ingress.path [string] Default path for the ingress record (evaluated as template)
   ##
   path: "{{ .Values.httpRelativePath }}"
@@ -646,7 +646,7 @@ ingress:
   ##
   extraTls: []
 #    - hosts:
-#        - kc.pastelcloud.store
+#        - kc.pastelcloud.shop
 #      secretName: "letsencrypt-prod"
   ## @param ingress.secrets If you're providing your own certificates, please use this to add the certificates as secrets
   ## key and certificate should start with -----BEGIN CERTIFICATE----- or
@@ -677,7 +677,7 @@ ingress:
   ##             name: http
   ##
   extraRules: []
-#    - host: 'kc.pastelcloud.store'
+#    - host: 'kc.pastelcloud.shop'
 #      http:
 #        paths:
 #          - path: "/"

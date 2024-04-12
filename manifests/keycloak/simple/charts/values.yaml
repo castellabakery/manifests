@@ -1,6 +1,6 @@
 namespace: keycloak
 
 subDomain: "keycloak"
-domain: "pastelcloud.store"
+domain: "pastelcloud.shop"
 
 secretName: letsencrypt-prod

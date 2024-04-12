@@ -146,13 +146,13 @@ ingress:
   # kubernetes.io/ingress.class: nginx
   # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: kibana.pastelcloud.store
+    - host: kibana.pastelcloud.shop
       paths:
         - path: /
   tls:
     - secretName: nexus-issuer
       hosts:
-        - kibana.pastelcloud.store
+        - kibana.pastelcloud.shop
 
 readinessProbe:
   failureThreshold: 3
