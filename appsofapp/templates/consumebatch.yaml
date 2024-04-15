@@ -5,7 +5,7 @@ metadata:
 spec:
   project: service-app
   source:
-    repoURL: 'https://github.com/castellabakery/consumeBatch.git'
+    repoURL: 'git@github.com:castellabakery/consumeBatch.git'
     path: manifests/chart
     targetRevision: main
   destination:
