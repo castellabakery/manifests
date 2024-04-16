@@ -13,7 +13,7 @@ spec:
         - name: primary.service.ports.mysql
           value: '13306'
         - name: auth.rootPassword
-          value: dlwk2452!@
+          value: 'dlwk2452!@'
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: mariadb

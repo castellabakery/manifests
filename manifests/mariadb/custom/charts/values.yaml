@@ -18,7 +18,7 @@ global:
   ##   - myRegistryKeySecretName
   ##
   imagePullSecrets: []
-  storageClass: "mariadb-storage"
+  storageClass: ""
 
 ## @section Common parameters
 ##
@@ -117,7 +117,7 @@ auth:
   ## @param auth.rootPassword Password for the `root` user. Ignored if existing secret is provided.
   ## ref: https://github.com/bitnami/containers/tree/main/bitnami/mariadb#setting-the-root-password-on-first-run
   ##
-  rootPassword: "dlwk2452!@"
+  rootPassword: "test"
   ## @param auth.database Name for a custom database to create
   ## ref: https://github.com/bitnami/containers/blob/main/bitnami/mariadb/README.md#creating-a-database-on-first-run
   ##
@@ -125,24 +125,24 @@ auth:
   ## @param auth.username Name for a custom user to create
   ## ref: https://github.com/bitnami/containers/blob/main/bitnami/mariadb/README.md#creating-a-database-user-on-first-run
   ##
-  username: ""
+  username: "test"
   ## @param auth.password Password for the new user. Ignored if existing secret is provided
   ##
-  password: ""
+  password: "test"
   ## @param auth.replicationUser MariaDB replication user
   ## ref: https://github.com/bitnami/containers/tree/main/bitnami/mariadb#setting-up-a-replication-cluster
   ##
-  replicationUser: replicator
+  replicationUser: replication
   ## @param auth.replicationPassword MariaDB replication user password. Ignored if existing secret is provided
   ## ref: https://github.com/bitnami/containers/tree/main/bitnami/mariadb#setting-up-a-replication-cluster
   ##
-  replicationPassword: ""
+  replicationPassword: "test"
   ## @param auth.existingSecret Use existing secret for password details (`auth.rootPassword`, `auth.password`, `auth.replicationPassword` will be ignored and picked up from this secret). The secret has to contain the keys `mariadb-root-password`, `mariadb-replication-password` and `mariadb-password`
   ##
   existingSecret: ""
   ## @param auth.forcePassword Force users to specify required passwords
   ##
-  forcePassword: false
+  forcePassword: true
   ## @param auth.usePasswordFiles Mount credentials as files instead of using environment variables
   ##
   usePasswordFiles: false
@@ -210,6 +210,7 @@ primary:
     collation-server=utf8_general_ci
     slow_query_log=0
     long_query_time=10.0
+    log_warning=1
 
     [client]
     port=3306
@@ -316,7 +317,7 @@ primary:
   ## @param primary.podSecurityContext.fsGroup Group ID for the mounted volumes' filesystem
   ##
   podSecurityContext:
-    enabled: true
+    enabled: false
     fsGroup: 1001
   ## MariaDB primary container security context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container
@@ -327,7 +328,7 @@ primary:
   ## @param primary.containerSecurityContext.allowPrivilegeEscalation Set primary container's Security Context allowPrivilegeEscalation
   ##
   containerSecurityContext:
-    enabled: true
+    enabled: false
     runAsUser: 1000
     runAsNonRoot: true
     privileged: false
@@ -460,7 +461,7 @@ primary:
     ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
     ##   GKE, AWS & OpenStack)
     ##
-    storageClass: ""
+    storageClass: "mariadb-storage"
     ## @param primary.persistence.labels Labels for the PVC
     ##
     labels: {}
@@ -489,7 +490,18 @@ primary:
   extraVolumeMounts: []
   ## @param primary.initContainers Add additional init containers for the MariaDB Primary pod(s)
   ##
-  initContainers: []
+  initContainers:
+    - name: mariadb-create-directory-structure
+      image: busybox
+      command:
+        [
+          "sh",
+          "-c",
+          "chown -R 1001:1001 /bitnami",
+        ]
+      volumeMounts:
+        - name: data
+          mountPath: /bitnami
   ## @param primary.sidecars Add additional sidecar containers for the MariaDB Primary pod(s)
   ##
   sidecars: []
@@ -608,6 +620,7 @@ secondary:
     collation-server=utf8_general_ci
     slow_query_log=0
     long_query_time=10.0
+    log_warning=1
 
     [client]
     port=3306
@@ -713,7 +726,7 @@ secondary:
   ## @param secondary.podSecurityContext.fsGroup Group ID for the mounted volumes' filesystem
   ##
   podSecurityContext:
-    enabled: true
+    enabled: false
     fsGroup: 1001
   ## MariaDB secondary container security context
   ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container
@@ -724,7 +737,7 @@ secondary:
   ## @param secondary.containerSecurityContext.allowPrivilegeEscalation Set secondary container's Security Context allowPrivilegeEscalation
   ##
   containerSecurityContext:
-    enabled: true
+    enabled: false
     runAsUser: 1001
     runAsNonRoot: true
     privileged: false
@@ -853,7 +866,7 @@ secondary:
     ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
     ##   GKE, AWS & OpenStack)
     ##
-    storageClass: ""
+    storageClass: "mariadb-storage1"
     ## @param secondary.persistence.labels Labels for the PVC
     ##
     labels: {}
@@ -872,6 +885,7 @@ secondary:
     ##   matchLabels:
     ##     app: my-app
     ##
+    hostPath: /data/mariadb/secondary
     selector: {}
   ## @param secondary.extraVolumes Optionally specify extra list of additional volumes to the MariaDB secondary pod(s)
   ##
@@ -881,7 +895,18 @@ secondary:
   extraVolumeMounts: []
   ## @param secondary.initContainers Add additional init containers for the MariaDB secondary pod(s)
   ##
-  initContainers: []
+  initContainers:
+    - name: mariadb-create-directory-structure
+      image: busybox
+      command:
+        [
+          "sh",
+          "-c",
+          "chown -R 1001:1001 /bitnami",
+        ]
+      volumeMounts:
+        - name: data
+          mountPath: /bitnami
   ## @param secondary.sidecars Add additional sidecar containers for the MariaDB secondary pod(s)
   ##
   sidecars: []
