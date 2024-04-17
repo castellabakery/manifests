@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mariadb-repl
+spec:
+  project: database
+  source:
+    repoURL: 'https://github.com/castellabakery/manifests.git'
+    path: manifests/mariadb/replication/charts
+    targetRevision: main
+{{/*    helm:*/}}
+{{/*      parameters:*/}}
+{{/*        - name: primary.service.ports.mysql*/}}
+{{/*          value: '3306'*/}}
+{{/*        - name: auth.rootPassword*/}}
+{{/*          value: 'dlwk2452!@'*/}}
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: mariadb-repl
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
