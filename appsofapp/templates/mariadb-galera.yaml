@@ -1,16 +1,16 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: mariadb-repl
+  name: mariadb-galera
 spec:
   project: database
   source:
     repoURL: 'https://github.com/castellabakery/manifests.git'
-    path: manifests/mariadb/replication/charts
+    path: manifests/mariadb/mariadb-galera
     targetRevision: main
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: mariadb-repl
+    namespace: mariadb-galera
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
