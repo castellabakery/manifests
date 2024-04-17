@@ -14,20 +14,3 @@ spec:
   hostPath:
     path: {{ .Values.primary.persistence.hostPath }}
     type: DirectoryOrCreate
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: mariadb-pv-replica1
-spec:
-  storageClassName: mariadb-storage1
-  capacity:
-    storage: {{ .Values.secondary.persistence.size }}
-  accessModes:
-    - ReadWriteOnce
-  #  claimRef:
-  #    name: mariadb-pvc
-  #    namespace: {{ .Values.secondary.persistence.hostPath }}
-  hostPath:
-    path: {{ .Values.secondary.persistence.hostPath }}
-    type: DirectoryOrCreate
