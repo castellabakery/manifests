@@ -19,6 +19,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ printf "%s-headless" (include "common.names.fullname" .) }}
+                name: {{ printf "%s-master" (include "common.names.fullname" .) }}
                 port:
                   number: {{ .Values.master.service.ports.redis }}
