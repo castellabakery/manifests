@@ -19,6 +19,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: {{ printf "%s-metrics" (include "common.names.fullname" .) }}
+                name: {{ printf "%s-headless" (include "common.names.fullname" .) }}
                 port:
-                  number: {{ coalesce .Values.metrics.service.ports.http .Values.metrics.service.port }}
+                  number: {{ .Values.master.service.ports.redis }}
