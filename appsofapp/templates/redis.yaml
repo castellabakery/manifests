@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: redis
+spec:
+  project: common
+  source:
+    repoURL: 'https://github.com/castellabakery/manifests.git'
+    path: manifests/redis/charts
+    targetRevision: main
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: redis
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

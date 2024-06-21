@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ printf "%s-ingress" (include "common.names.fullname" .) }}
+  annotations:
+    app.kubernetes.io/name: "ingress-nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: "/"
+    cert-manager.io/cluster-issuer: {{ .Values.ingress.tls.secretName }}
+spec:
+  tls:
+    - hosts:
+        - "{{ .Values.ingress.tls.subDomain }}.{{ .Values.ingress.tls.domain }}"
+      secretName: {{ .Values.ingress.tls.secretName }}
+  rules:
+    - host: "{{ .Values.ingress.subDomain }}.{{ .Values.ingress.domain }}"
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ printf "%s-metrics" (include "common.names.fullname" .) }}
+                port:
+                  number: {{ coalesce .Values.metrics.service.ports.http .Values.metrics.service.port }}
