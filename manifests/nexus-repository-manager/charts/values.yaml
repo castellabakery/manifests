@@ -60,9 +60,9 @@ nexus:
   # Customize or remove these values from the securityContext as appropriate for
   # your deployment environment.
   securityContext:
-    runAsUser: 0
-    runAsGroup: 0
-    fsGroup: 0
+    runAsUser: 200
+    runAsGroup: 200
+    fsGroup: 200
   podAnnotations: {}
   livenessProbe:
     initialDelaySeconds: 60

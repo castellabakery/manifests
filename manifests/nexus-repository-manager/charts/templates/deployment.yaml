@@ -61,7 +61,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           securityContext:
             allowPrivilegeEscalation: false
-            runAsNonRoot: false
+            runAsNonRoot: true
             seccompProfile:
               type: RuntimeDefault
             capabilities:
