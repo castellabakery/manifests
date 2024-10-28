@@ -101,7 +101,7 @@ deployment:
 #          mountPath: /nexus-data
   # Uncomment and modify this to run a command after starting the nexus container.
   postStart:
-    command:    # '["/bin/sh", "-c", "ls"]'
+    command: ['chown','-R', '200:200', '/nexus-data'] # '["/bin/sh", "-c", "ls"]'
   preStart:
     command: ['chown','-R', '200:200', '/nexus-data']
   terminationGracePeriodSeconds: 120
