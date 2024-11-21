@@ -8,9 +8,6 @@ spec:
     repoURL: 'https://github.com/castellabakery/manifests.git'
     path: manifests/jenkins/charts
     targetRevision: main
-    helm:
-      valueFiles:
-        - override.values.yaml
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: jenkins
