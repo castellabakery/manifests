@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: body
+spec:
+  project: service-app
+  source:
+    repoURL: 'git@github.com:castellabakery/body.git'
+    path: manifests/body
+    targetRevision: main
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: body
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
