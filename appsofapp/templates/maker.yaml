@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: maker
+spec:
+  project: service-app
+  source:
+    repoURL: 'git@github.com:castellabakery/maker.git'
+    path: manifests/maker
+    targetRevision: main
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: maker
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
