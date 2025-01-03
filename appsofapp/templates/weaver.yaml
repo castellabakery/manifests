@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: weaver
+spec:
+  project: service-app
+  source:
+    repoURL: 'git@github.com:castellabakery/lightweaver.git'
+    path: manifests/weaver
+    targetRevision: main
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: weaver
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
