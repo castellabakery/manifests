@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: viluser
+spec:
+  project: service-app
+  source:
+    repoURL: 'git@github.com:castellabakery/village_user.git'
+    path: manifests/user
+    targetRevision: main
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: viluser
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
