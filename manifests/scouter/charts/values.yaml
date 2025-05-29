@@ -6,6 +6,6 @@ collector:
 client:
   subDomain: "sctcli"
 
-domain: "pastelcloud.shop"
+domain: "pastelcloud.store"
 
 secretName: letsencrypt-prod

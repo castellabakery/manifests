@@ -2232,6 +2232,6 @@ ingress:
   tls:
     secretName: letsencrypt-prod
     subDomain: redis
-    domain: pastelcloud.shop
+    domain: pastelcloud.store
   subDomain: redis
-  domain: pastelcloud.shop
+  domain: pastelcloud.store

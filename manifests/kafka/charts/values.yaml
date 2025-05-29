@@ -1421,7 +1421,7 @@ externalAccess:
       ## NodePort: If not specified, the container will try to get the kubernetes node external IP
       ## ClusterIP: Must be specified, ingress IP or domain where tcp for external ports is configured
       ##
-      domain: "pastelcloud.shop"
+      domain: "pastelcloud.store"
       ## @param externalAccess.controller.service.publishNotReadyAddresses Indicates that any agent which deals with endpoints for this Service should disregard any indications of ready/not-ready
       ## ref: https://kubernetes.io/docs/reference/kubernetes-api/service-resources/service-v1/
       ##
@@ -1499,7 +1499,7 @@ externalAccess:
       ## NodePort: If not specified, the container will try to get the kubernetes node external IP
       ## ClusterIP: Must be specified, ingress IP or domain where tcp for external ports is configured
       ##
-      domain: "pastelcloud.shop"
+      domain: "pastelcloud.store"
       ## @param externalAccess.broker.service.publishNotReadyAddresses Indicates that any agent which deals with endpoints for this Service should disregard any indications of ready/not-ready
       ## ref: https://kubernetes.io/docs/reference/kubernetes-api/service-resources/service-v1/
       ##
@@ -2413,8 +2413,8 @@ ingress:
     - /
   pathType: Prefix
   hosts:
-    - kafka.pastelcloud.shop
+    - kafka.pastelcloud.store
   tls:
     - secretName: letsencrypt-prod
       hosts:
-        - kafka.pastelcloud.shop
+        - kafka.pastelcloud.store

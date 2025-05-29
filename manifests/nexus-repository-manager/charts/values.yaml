@@ -17,10 +17,10 @@ nexus:
   docker:
     enabled: true
     registries:
-      - host: registry.pastelcloud.shop
+      - host: registry.pastelcloud.store
         port: 5000
         secretName: registry-secret
-      - host: dh.pastelcloud.shop
+      - host: dh.pastelcloud.store
         port: 5001
         secretName: dockerhub-secret
   env:
@@ -118,11 +118,11 @@ ingress:
     nginx.ingress.kubernetes.io/rewrite-target: "/"
     cert-manager.io/cluster-issuer: nexus-issuer
   hostPath: /
-  hostRepo: "nex.pastelcloud.shop"
+  hostRepo: "nex.pastelcloud.store"
   tls:
     - secretName: nexus-issuer
       hosts:
-        - nex.pastelcloud.shop
+        - nex.pastelcloud.store
 
 
 service:

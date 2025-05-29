@@ -470,11 +470,11 @@ controller:
     # Set this path to jenkinsUriPrefix above or use annotations to rewrite path
     # path: "/jenkins"
     # configures the hostname e.g. jenkins.example.com
-    hostName: jenkins.pastelcloud.shop
+    hostName: jenkins.pastelcloud.store
     tls:
       - secretName: letsencrypt-prod
         hosts:
-          - jenkins.pastelcloud.shop
+          - jenkins.pastelcloud.store
 
   # often you want to have your controller all locked down and private
   # but you still want to get webhooks from your SCM

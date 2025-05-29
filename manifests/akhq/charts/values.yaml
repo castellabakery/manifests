@@ -154,11 +154,11 @@ ingress:
     - /
   pathType: "ImplementationSpecific"
   hosts:
-    - akhq.pastelcloud.shop
+    - akhq.pastelcloud.store
   tls:
     - secretName: akhq-secret
       hosts:
-        - akhq.pastelcloud.shop
+        - akhq.pastelcloud.store
 
 ### Readiness / Liveness probe config.
 ### ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/

@@ -721,14 +721,14 @@ controller:
 
     # configures the hostname e.g. jenkins.example.com
     # -- Ingress hostname
-    hostName: jenkins.pastelcloud.shop
+    hostName: jenkins.pastelcloud.store
     # -- Hostname to serve assets from
     resourceRootUrl:
     # -- Ingress TLS configuration
     tls:
       - secretName: letsencrypt-prod
         hosts:
-          - jenkins.pastelcloud.shop
+          - jenkins.pastelcloud.store
     # - secretName: jenkins.cluster.local
     #   hosts:
     #     - jenkins.cluster.local
