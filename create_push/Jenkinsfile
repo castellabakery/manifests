@@ -1,0 +1,95 @@
+pipeline {
+    agent {
+        label 'Host'
+    }
+    parameters {
+        string(
+            name: 'BRANCH_NAME',
+            defaultValue: params.BRANCH_NAME ?: '*/main',
+            description: '[REQUIRED] 빌드를 원하는 브랜치명을 정확히 입력해주세요. (ex. */develop, */feature/test-branch) (tag도 가능. ex. tags/{태그명})'
+        )
+        string(
+            name: 'MY_IMAGE_NAME',
+            defaultValue: params.MY_IMAGE_NAME ?: '',
+            description: '[REQUIRED] 생성할 이미지 이름. (ex. bitnami/mariadb)'
+        )
+        string(
+            name: 'MY_IMAGE_TAG',
+            defaultValue: params.MY_IMAGE_TAG ?: '',
+            description: '[REQUIRED] 생성할 이미지 태그. (ex. 11.4.4-debian-12-r2)'
+        )
+        string(
+            name: 'DOCKER_REGISTRY',
+            defaultValue: params.DOCKER_REGISTRY ?: 'registry.pastelcloud.store',
+            description: '[docker_hosted image push] 관리자외 수정 금지'
+        )
+        string(
+            name: 'DOCKER_HUB',
+            defaultValue: params.DOCKER_HUB ?: 'dh.pastelcloud.store',
+            description: '[docker_hosted image pull] 관리자외 수정 금지'
+        )
+    }
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('my-nex-docker-registry')
+        VERSION = "${params.MY_IMAGE_TAG}"
+        IMAGE = "${params.MY_IMAGE_NAME}"
+        DOCKER_HUB = "${params.DOCKER_HUB}"
+    }
+    stages {
+        stage('0. clean workspace') {
+            steps {
+                cleanWs()
+            }
+        }
+        stage('1. Check Parameters') {
+            steps{
+                script {
+                    if(params.DOCKER_REGISTRY.isEmpty()) {
+                        error("Environment Parameter - DOCKER_REGISTRY is Empty.")
+                    }
+                    if(params.MY_IMAGE_NAME.isEmpty()) {
+                        error("Environment Parameter - MY_IMAGE_NAME is Empty.")
+                    }
+                    if(params.MY_IMAGE_TAG.isEmpty()) {
+                        error("Environment Parameter - MY_IMAGE_TAG is Empty.")
+                    }
+                    if(params.BRANCH_NAME.isEmpty()) {
+                        error("Environment Parameter - BRANCH_NAME is Empty")
+                    }
+                }
+            }
+        }
+        stage('2. Git Checkout') {
+            steps {
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: "${params.BRANCH_NAME}"]],
+                    userRemoteConfigs: [[credentialsId: 'github-token-password', url: 'https://github.com/castellabakery/manifests.git']]
+                ])
+            }
+        }
+        stage('3. Make Dockerfile') {
+            steps {
+                sh '''
+                    echo "FROM $DOCKER_HUB/$MY_IMAGE_NAME:$MY_IMAGE_TAG" >> Dockerfile
+                '''
+            }
+        }
+        stage('4. Docker Build') {
+            steps {
+                script {
+                    app = docker.build("${params.DOCKER_REGISTRY}/${env.IMAGE}")
+                }
+            }
+        }
+        stage('5. Docker Push') {
+            steps {
+                script {
+                    docker.withRegistry("https://${DOCKER_REGISTRY}", 'my-nex-docker-registry') {
+                        app.push("${env.VERSION}")
+                    }
+                }
+            }
+        }
+    }
+}
