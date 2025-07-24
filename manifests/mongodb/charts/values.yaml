@@ -129,7 +129,7 @@ diagnosticMode:
 ## @param image.debug Set to true if you would like to see extra information on logs
 ##
 image:
-  registry: docker.io
+  registry: registry.pastelcloud.store
   repository: bitnami/mongodb
   tag: 8.0.3-debian-12-r0
   digest: ""
@@ -255,7 +255,7 @@ tls:
   ## @param tls.extraDnsNames Add extra dns names to the CA, can solve x509 auth issue for pod clients
   ##
   image:
-    registry: docker.io
+    registry: registry.pastelcloud.store
     repository: bitnami/nginx
     tag: 1.27.2-debian-12-r2
     digest: ""
@@ -843,7 +843,7 @@ externalAccess:
     ## @param externalAccess.autoDiscovery.image.pullSecrets Init container auto-discovery image pull secrets
     ##
     image:
-      registry: docker.io
+      registry: registry.pastelcloud.store
       repository: bitnami/kubectl
       tag: 1.31.2-debian-12-r3
       digest: ""
@@ -892,7 +892,7 @@ externalAccess:
     ## @param externalAccess.dnsCheck.image.pullSecrets Init container dns-check image pull secrets
     ##
     image:
-      registry: docker.io
+      registry: registry.pastelcloud.store
       repository: bitnami/os-shell
       tag: 12-debian-12-r32
       digest: ""
@@ -1618,7 +1618,7 @@ volumePermissions:
   ## @param volumePermissions.image.pullSecrets Specify docker-registry secret names as an array
   ##
   image:
-    registry: docker.io
+    registry: registry.pastelcloud.store
     repository: bitnami/os-shell
     tag: 12-debian-12-r32
     digest: ""
@@ -2418,7 +2418,7 @@ metrics:
   ## @param metrics.image.pullSecrets Specify docker-registry secret names as an array
   ##
   image:
-    registry: docker.io
+    registry: registry.pastelcloud.store
     repository: bitnami/mongodb-exporter
     tag: 0.41.2-debian-12-r1
     digest: ""

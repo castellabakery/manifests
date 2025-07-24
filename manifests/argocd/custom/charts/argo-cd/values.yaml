@@ -1176,7 +1176,7 @@ redis:
     ## Prometheus redis-exporter image
     image:
       # -- Repository to use for the redis-exporter
-      repository: public.ecr.aws/bitnami/redis-exporter
+      repository: registry.pastelcloud.store/bitnami/redis-exporter
       # -- Tag to use for the redis-exporter
       tag: 1.53.0
       # -- Image pull policy for the redis-exporter
@@ -1388,7 +1388,7 @@ redis-ha:
     # -- Enable Prometheus redis-exporter sidecar
     enabled: false
     # -- Repository to use for the redis-exporter
-    image: public.ecr.aws/bitnami/redis-exporter
+    image: registry.pastelcloud.store/bitnami/redis-exporter
     # -- Tag to use for the redis-exporter
     tag: 1.53.0
   persistentVolume:

@@ -98,7 +98,7 @@ diagnosticMode:
 ## @param image.debug Enable image debug mode
 ##
 image:
-  registry: docker.io
+  registry: registry.pastelcloud.store
   repository: bitnami/redis
   tag: 7.2.5-debian-12-r0
   digest: ""
@@ -1130,7 +1130,7 @@ sentinel:
   ## @param sentinel.image.debug Enable image debug mode
   ##
   image:
-    registry: docker.io
+    registry: registry.pastelcloud.store
     repository: bitnami/redis-sentinel
     tag: 7.2.5-debian-12-r0
     digest: ""
@@ -1681,7 +1681,7 @@ metrics:
   ## @param metrics.image.pullSecrets Redis&reg; Exporter image pull secrets
   ##
   image:
-    registry: docker.io
+    registry: registry.pastelcloud.store
     repository: bitnami/redis-exporter
     tag: 1.61.0-debian-12-r0
     digest: ""
@@ -2053,7 +2053,7 @@ volumePermissions:
   ## @param volumePermissions.image.pullSecrets OS Shell + Utility image pull secrets
   ##
   image:
-    registry: docker.io
+    registry: registry.pastelcloud.store
     repository: bitnami/os-shell
     tag: 12-debian-12-r22
     digest: ""
@@ -2109,7 +2109,7 @@ kubectl:
   ## @param kubectl.image.pullSecrets Kubectl pull secrets
   ##
   image:
-    registry: docker.io
+    registry: registry.pastelcloud.store
     repository: bitnami/kubectl
     tag: 1.30.2-debian-12-r0
     digest: ""
@@ -2179,7 +2179,7 @@ sysctl:
   ## @param sysctl.image.pullSecrets OS Shell + Utility image pull secrets
   ##
   image:
-    registry: docker.io
+    registry: registry.pastelcloud.store
     repository: bitnami/os-shell
     tag: 12-debian-12-r22
     digest: ""

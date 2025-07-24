@@ -108,7 +108,7 @@ diagnosticMode:
 ## @param image.debug Specify if debug values should be set
 ##
 image:
-  registry: docker.io
+  registry: registry.pastelcloud.store
   repository: bitnami/postgresql
   tag: 17.2.0-debian-12-r0
   digest: ""
@@ -1580,7 +1580,7 @@ volumePermissions:
   ## @param volumePermissions.image.pullSecrets Init container volume-permissions image pull secrets
   ##
   image:
-    registry: docker.io
+    registry: registry.pastelcloud.store
     repository: bitnami/os-shell
     tag: 12-debian-12-r33
     digest: ""
@@ -1689,7 +1689,7 @@ metrics:
   ## @param metrics.image.pullSecrets Specify image pull secrets
   ##
   image:
-    registry: docker.io
+    registry: registry.pastelcloud.store
     repository: bitnami/postgres-exporter
     tag: 0.16.0-debian-12-r1
     digest: ""
