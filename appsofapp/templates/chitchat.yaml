@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: chitchat
+spec:
+  project: service-app
+  source:
+    repoURL: 'git@github.com:castellabakery/chitchat.git'
+    path: manifests/chitchat
+    targetRevision: main
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: chitchat
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
