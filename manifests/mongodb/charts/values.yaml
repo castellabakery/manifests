@@ -957,7 +957,8 @@ externalAccess:
     ##   - X.X.X.X
     ##   - Y.Y.Y.Y
     ##
-    loadBalancerIPs: []
+    loadBalancerIPs:
+      - 49.142.43.92
     ## @param externalAccess.service.publicNames Array of public names. The size should be equal to the number of replicas.
     ##
     publicNames: []
@@ -993,7 +994,7 @@ externalAccess:
     ## e.g:
     ## domain: mydomain.com
     ##
-    domain: "pastelcloud.store"
+    domain: ""
     ## @param externalAccess.service.extraPorts Extra ports to expose (normally used with the `sidecar` value)
     ##
     extraPorts: []
