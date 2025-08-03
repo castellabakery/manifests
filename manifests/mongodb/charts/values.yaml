@@ -463,7 +463,7 @@ labels: {}
 ## When `mongodb.architecture=replicaset`, the number of replicas is taken in account
 ## When `mongodb.architecture=standalone`, the number of replicas can only be 0 or 1 (value higher then 1 will not be taken in account)
 ##
-replicaCount: 2
+replicaCount: 3
 ## @param updateStrategy.type Strategy to use to replace existing MongoDB(&reg;) pods. When architecture=standalone and useStatefulSet=false,
 ## this parameter will be applied on a deployment object. In other case it will be applied on a statefulset object
 ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#update-strategies
@@ -752,7 +752,7 @@ pdb:
 service:
   ## @param service.nameOverride MongoDB(&reg;) service name
   ##
-  nameOverride: "mongodb"
+  nameOverride: ""
   ## @param service.type Kubernetes Service type (only for standalone architecture)
   ##
   type: NodePort
@@ -824,7 +824,7 @@ service:
 externalAccess:
   ## @param externalAccess.enabled Enable Kubernetes external cluster access to MongoDB(&reg;) nodes (only for replicaset architecture)
   ##
-  enabled: false
+  enabled: true
   ## External IPs auto-discovery configuration
   ## An init container is used to auto-detect LB IPs or node ports by querying the K8s API
   ## Note: RBAC might be required
@@ -832,7 +832,7 @@ externalAccess:
   autoDiscovery:
     ## @param externalAccess.autoDiscovery.enabled Enable using an init container to auto-detect external IPs by querying the K8s API
     ##
-    enabled: false
+    enabled: true
     ## Bitnami Kubectl image
     ## ref: https://hub.docker.com/r/bitnami/kubectl/tags/
     ## @param externalAccess.autoDiscovery.image.registry [default: REGISTRY_NAME] Init container auto-discovery image registry
@@ -934,7 +934,7 @@ externalAccess:
   ## @param externalAccess.externalMaster.port Port for MongoDB(&reg;) service external master host
   ##
   externalMaster:
-    enabled: false
+    enabled: true
     host: ""
     port: 27017
   ## Parameters to configure K8s service(s) used to externally access MongoDB(&reg;)
@@ -1533,7 +1533,7 @@ rbac:
   ## that allows MongoDB(&reg;) pods querying the K8s API
   ## this needs to be set to 'true' to enable the mongo-labeler sidecar primary mongodb discovery
   ##
-  create: false
+  create: true
   ## @param rbac.rules Custom rules to create following the role specification
   ## The example below needs to be uncommented to use the 'mongo-labeler' sidecar for dynamic discovery of the primary mongodb pod:
   ## rules:
@@ -1547,7 +1547,16 @@ rbac:
   ##       - watch
   ##       - update
   ##
-  rules: []
+  rules:
+    - apiGroups:
+        - ""
+      resources:
+        - pods
+      verbs:
+        - get
+        - list
+        - watch
+        - update
 ## PodSecurityPolicy configuration
 ## Be sure to also set rbac.create to true, otherwise Role and RoleBinding won't be created.
 ## ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/
@@ -1555,7 +1564,7 @@ rbac:
 podSecurityPolicy:
   ## @param podSecurityPolicy.create Whether to create a PodSecurityPolicy. WARNING: PodSecurityPolicy is deprecated in Kubernetes v1.21 or later, unavailable in v1.25 or later
   ##
-  create: false
+  create: true
   ## @param podSecurityPolicy.allowPrivilegeEscalation Enable privilege escalation
   ## Either use predefined policy with some adjustments or use `podSecurityPolicy.spec`
   ##
@@ -1677,7 +1686,7 @@ arbiter:
   enabled: true
   ## @param arbiter.automountServiceAccountToken Mount Service Account token in pod
   ##
-  automountServiceAccountToken: false
+  automountServiceAccountToken: true
   ## @param arbiter.hostAliases Add deployment host aliases
   ## https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/
   ##
