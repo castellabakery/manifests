@@ -154,7 +154,7 @@ image:
 schedulerName: ""
 ## @param architecture MongoDB(&reg;) architecture (`standalone` or `replicaset`)
 ##
-architecture: replicaset
+architecture: standalone
 ## @param useStatefulSet Set to true to use a StatefulSet instead of a Deployment (only when `architecture=standalone`)
 ##
 useStatefulSet: false
@@ -190,7 +190,7 @@ auth:
   database: ""
   ## @param auth.replicaSetKey Key used for authentication in the replicaset (only when `architecture=replicaset`)
   ##
-  replicaSetKey: "dlwk2452!@"
+  replicaSetKey: ""
   ## @param auth.existingSecret Existing secret with MongoDB(&reg;) credentials (keys: `mongodb-passwords`, `mongodb-root-password`, `mongodb-metrics-password`, `mongodb-replica-set-key`)
   ## NOTE: When it's set the previous parameters are ignored.
   ##
@@ -463,7 +463,7 @@ labels: {}
 ## When `mongodb.architecture=replicaset`, the number of replicas is taken in account
 ## When `mongodb.architecture=standalone`, the number of replicas can only be 0 or 1 (value higher then 1 will not be taken in account)
 ##
-replicaCount: 3
+replicaCount: 2
 ## @param updateStrategy.type Strategy to use to replace existing MongoDB(&reg;) pods. When architecture=standalone and useStatefulSet=false,
 ## this parameter will be applied on a deployment object. In other case it will be applied on a statefulset object
 ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#update-strategies
@@ -824,7 +824,7 @@ service:
 externalAccess:
   ## @param externalAccess.enabled Enable Kubernetes external cluster access to MongoDB(&reg;) nodes (only for replicaset architecture)
   ##
-  enabled: true
+  enabled: false
   ## External IPs auto-discovery configuration
   ## An init container is used to auto-detect LB IPs or node ports by querying the K8s API
   ## Note: RBAC might be required
@@ -832,7 +832,7 @@ externalAccess:
   autoDiscovery:
     ## @param externalAccess.autoDiscovery.enabled Enable using an init container to auto-detect external IPs by querying the K8s API
     ##
-    enabled: true
+    enabled: false
     ## Bitnami Kubectl image
     ## ref: https://hub.docker.com/r/bitnami/kubectl/tags/
     ## @param externalAccess.autoDiscovery.image.registry [default: REGISTRY_NAME] Init container auto-discovery image registry
@@ -934,7 +934,7 @@ externalAccess:
   ## @param externalAccess.externalMaster.port Port for MongoDB(&reg;) service external master host
   ##
   externalMaster:
-    enabled: true
+    enabled: false
     host: ""
     port: 27017
   ## Parameters to configure K8s service(s) used to externally access MongoDB(&reg;)
@@ -1533,7 +1533,7 @@ rbac:
   ## that allows MongoDB(&reg;) pods querying the K8s API
   ## this needs to be set to 'true' to enable the mongo-labeler sidecar primary mongodb discovery
   ##
-  create: true
+  create: false
   ## @param rbac.rules Custom rules to create following the role specification
   ## The example below needs to be uncommented to use the 'mongo-labeler' sidecar for dynamic discovery of the primary mongodb pod:
   ## rules:
@@ -1547,16 +1547,7 @@ rbac:
   ##       - watch
   ##       - update
   ##
-  rules:
-    - apiGroups:
-        - ""
-      resources:
-        - pods
-      verbs:
-        - get
-        - list
-        - watch
-        - update
+  rules: []
 ## PodSecurityPolicy configuration
 ## Be sure to also set rbac.create to true, otherwise Role and RoleBinding won't be created.
 ## ref: https://kubernetes.io/docs/concepts/policy/pod-security-policy/
@@ -1564,7 +1555,7 @@ rbac:
 podSecurityPolicy:
   ## @param podSecurityPolicy.create Whether to create a PodSecurityPolicy. WARNING: PodSecurityPolicy is deprecated in Kubernetes v1.21 or later, unavailable in v1.25 or later
   ##
-  create: true
+  create: false
   ## @param podSecurityPolicy.allowPrivilegeEscalation Enable privilege escalation
   ## Either use predefined policy with some adjustments or use `podSecurityPolicy.spec`
   ##
@@ -1686,7 +1677,7 @@ arbiter:
   enabled: true
   ## @param arbiter.automountServiceAccountToken Mount Service Account token in pod
   ##
-  automountServiceAccountToken: true
+  automountServiceAccountToken: false
   ## @param arbiter.hostAliases Add deployment host aliases
   ## https://kubernetes.io/docs/concepts/services-networking/add-entries-to-pod-etc-hosts-with-host-aliases/
   ##
