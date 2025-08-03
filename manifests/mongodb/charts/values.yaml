@@ -832,7 +832,7 @@ externalAccess:
   autoDiscovery:
     ## @param externalAccess.autoDiscovery.enabled Enable using an init container to auto-detect external IPs by querying the K8s API
     ##
-    enabled: true
+    enabled: false
     ## Bitnami Kubectl image
     ## ref: https://hub.docker.com/r/bitnami/kubectl/tags/
     ## @param externalAccess.autoDiscovery.image.registry [default: REGISTRY_NAME] Init container auto-discovery image registry
@@ -934,7 +934,7 @@ externalAccess:
   ## @param externalAccess.externalMaster.port Port for MongoDB(&reg;) service external master host
   ##
   externalMaster:
-    enabled: false
+    enabled: true
     host: ""
     port: 27017
   ## Parameters to configure K8s service(s) used to externally access MongoDB(&reg;)
