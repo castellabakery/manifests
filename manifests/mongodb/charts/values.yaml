@@ -993,7 +993,7 @@ externalAccess:
     ## e.g:
     ## domain: mydomain.com
     ##
-    domain: ""
+    domain: "pastelcloud.store"
     ## @param externalAccess.service.extraPorts Extra ports to expose (normally used with the `sidecar` value)
     ##
     extraPorts: []
