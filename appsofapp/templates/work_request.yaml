@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: workrequest
+spec:
+  project: service-app
+  source:
+    repoURL: 'git@github.com:castellabakery/work_request.git'
+    path: manifests/work_request
+    targetRevision: main
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: workrequest
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
